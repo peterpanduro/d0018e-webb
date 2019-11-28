@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import './App.css';
 import Home from './views/Home'
 import Products from './views/Products'
+import Login from './views/Login'
+import RegisterProfile from './views/RegisterProfile'
 
 function App() {
   return (
@@ -12,10 +14,16 @@ function App() {
           <nav className="Navbar">
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Startsida</Link>
               </li>
               <li>
                 <Link to="/products">Produkter</Link>
+              </li>
+              <li>
+                <Link to="/login">Logga in</Link>
+              </li>
+              <li>
+                <Link to="/register">Registrera profil</Link>
               </li>
             </ul>
           </nav>
@@ -27,6 +35,12 @@ function App() {
             </Route>
             <Route path="/">
               <Home />
+            </Route>
+            <Route path ="/login">
+              <Login />
+            </Route>
+            <Route path ="/register">
+              <RegisterProfile />
             </Route>
           </Switch>
         </body>
