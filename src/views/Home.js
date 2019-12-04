@@ -1,9 +1,15 @@
 import React from 'react';
+import Categories from './components/Categories';
+import Borders from './components/Borders';
+
 
 function Home() {
   return (
     <div className="Home">
-      <h1>Home</h1>
+      <br></br>
+
+      <Categories/>
+
       
     </div>
   );

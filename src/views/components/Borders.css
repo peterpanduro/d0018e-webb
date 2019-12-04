@@ -1,0 +1,10 @@
+.Borders #left, #right {
+    background: yellow;
+    position: fixed;
+    top: 0; bottom: 0;
+    width: 100px;
+}
+#left { left: 0; }
+#right { right: 0; }
+  
+  

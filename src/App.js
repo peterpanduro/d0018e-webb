@@ -6,6 +6,7 @@ import Products from './views/Products'
 import Login from './views/Login'
 import RegisterProfile from './views/RegisterProfile'
 
+
 function App() {
   return (
     <Router>
@@ -25,6 +26,7 @@ function App() {
               <li>
                 <Link to="/register">Registrera profil</Link>
               </li>
+              
             </ul>
           </nav>
         </header>
