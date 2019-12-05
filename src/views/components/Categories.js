@@ -10,6 +10,8 @@ function Categories() {
           <li>Hemmet</li>
           <li>Mode</li>
           <li>Sockar</li>
+          <li>Hälsa</li>
+          <li>Underhållning</li>
       </ul>
     </div>
   );

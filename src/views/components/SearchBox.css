@@ -1,17 +1,13 @@
-.search-container button{
-    float: right;
-    padding: 11px 14px;
-    margin-top: 12px;
-    margin-right: 16px;
-    border: none;
-    cursor: pointer;
 
-    
+.SearchBox input[type = text] {
+    float:right;
+    padding: 6px;
+    margin-top: 13px;
+    margin-right: 50px;
+    font-size: 17px;
+
 }
 .search-container {
-    margin-top:10px;
     float: right;
 }
-.search-container button:hover {
-    background: #ccc;
-}
+

@@ -8,6 +8,7 @@
     border-color: #333;
   }
  .Categories li {
+     font-size: 18px;
     float:left;
     display: block;
     color: #333;
