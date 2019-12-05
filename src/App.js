@@ -5,6 +5,7 @@ import Home from './views/Home'
 import Products from './views/Products'
 import Login from './views/Login'
 import RegisterProfile from './views/RegisterProfile'
+import SearchBox from './views/components/SearchBox'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <header className="App-header">
           <nav className="Navbar">
             <ul>
+              <li><SearchBox/></li>
               <li>
                 <Link to="/">Startsida</Link>
               </li>

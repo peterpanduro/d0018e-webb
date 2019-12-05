@@ -7,10 +7,7 @@ function Home() {
   return (
     <div className="Home">
       <br></br>
-
       <Categories/>
-
-      
     </div>
   );
 }
