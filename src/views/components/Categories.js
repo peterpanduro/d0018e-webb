@@ -4,6 +4,7 @@ import './Categories.css';
 function Categories() {
   return (
     <div className="Categories">
+      <h2>Upptäck kategorier</h2>
       <ul>
           <li>Kläder</li>
           <li>Skor</li>

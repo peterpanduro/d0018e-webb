@@ -1,9 +1,10 @@
-.Categories ul {
+.Categories {
     background-color: white;
     list-style-type: none;
     overflow: hidden;
-    border-style: solid;
+    border-style: solid;    
     border-color: #333;  
+    border-width: 1px;
   }
 
  .Categories li {
