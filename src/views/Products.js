@@ -5,7 +5,6 @@ function Products() {
   return (
     <div className="Products">
       <br></br>
-
       <Categories/>
     </div>
   );

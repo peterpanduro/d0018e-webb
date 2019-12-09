@@ -1,5 +1,6 @@
 import React from 'react';
 import Categories from './components/Categories';
+import ProductList from './components/ProductList';
 
 
 function Home() {
@@ -7,6 +8,7 @@ function Home() {
     <div className="Home">
       <br></br>
       <Categories/>
+      <ProductList />
       
     </div>
   );
