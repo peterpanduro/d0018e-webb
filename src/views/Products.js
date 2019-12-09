@@ -1,9 +1,12 @@
 import React from 'react';
+import Categories from './components/Categories';
 
 function Products() {
   return (
     <div className="Products">
-      <h1>Products</h1>
+      <br></br>
+
+      <Categories/>
     </div>
   );
 }
