@@ -34,16 +34,16 @@ function App() {
         </header>
         <body>
           <Switch>
-            <Route path="/products">
+            <Route exact path="/products">
               <Products />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
             </Route>
-            <Route path ="/login">
+            <Route exact path ="/login">
               <Login />
             </Route>
-            <Route path ="/register">
+            <Route exact path ="/register">
               <RegisterProfile />
             </Route>
           </Switch>
