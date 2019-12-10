@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Categories from './components/CategoryList';
 import ProductList from './components/ProductList';
 import './Products.css';
+import queryString from 'query-string';
+
 
 class Products extends Component{
   constructor() {
@@ -14,6 +16,10 @@ class Products extends Component{
   componentDidMount() {
     // const { match: { params } } = this.props;
     // this.setState({category_id: params.category_id});
+
+    const query = queryString.parse(this.props.location.search);
+    console.log(query.q);
+
     this.fetchProducts()
   }
 
