@@ -12,9 +12,9 @@ class ProductList extends Component {
 
 
     componentDidMount() {
-        const { match: { params } } = this.props;
-        console.log(this.props);
-        fetch('http://localhost:3001/api/products').then(results => {
+        //const { match: { params } } = this.props;
+        //console.log(this.props);
+        fetch('http://api.d0018e.pndro.se/products').then(results => {
             return results.json();
         }).then(data => {
             let products = data.map((product) => {
