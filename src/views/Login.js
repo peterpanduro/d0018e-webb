@@ -20,14 +20,18 @@ function Login() {
             <div className = "loginBox">
                 <h2>Logga in</h2>
                 <div className = "input-container">
-                    <h3>E-post address</h3>
-                    <form action ="google.com">
-                        <input type="text" name="namn"></input>
-                    </form>
-                    <h3>Lösenord</h3>
-                    <form action ="google.com">
-                        <input type="text" name="password"></input>
-                    </form>
+                    
+                    <form action="www.google.com">
+                        <h3>E-post address</h3>
+                        <input type="text" name="Email"></input>
+                        
+                        <h3>Lösenord</h3>
+                        <input type="text" name="Password"></input>
+  
+                        <input type="submit" value="Logga in"></input>
+                    </form> 
+
+
                 </div>
             </div>
 
