@@ -5,7 +5,7 @@ import './SearchBox.css';
 function SearchBox() {
   return (
     <div className = 'SearchBox'>
-        <div class = "search-container">
+        <div className = "search-container">
             <form action ="google.com">
                 <input type="text" placeholder="Sök produkt.." name="search"></input>
             </form>

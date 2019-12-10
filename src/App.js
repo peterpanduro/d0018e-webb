@@ -33,6 +33,7 @@ function App() {
           </nav>
           
         </header>
+        
         <body>
           <div className ="Background">
             <div className = "Content">
