@@ -6,26 +6,27 @@ class ProductList extends Component {
     constructor() {
         super();
         this.state = {
-            products: [],
+            products: []
         };
     }
 
 
     componentDidMount() {
-        fetch('http://api.d0018e.pndro.se/products').then(results => {
+        const { match: { params } } = this.props;
+        console.log(this.props);
+        fetch('http://localhost:3001/api/products').then(results => {
             return results.json();
         }).then(data => {
             let products = data.map((product) => {
                 return(
-                    <div className="productItem">
-                        <div key ={product.ID}>
-                            <ul>
-                                <li>{product.Name}</li>
-                                <li>Pris: {product.Price}</li>
-                                <li>Lagerstatus: {product.Stock}</li>
-                                <li>Kategori: {product.Category}</li>
-                            </ul>
-                        </div>
+                    <div className="productItem" key ={product.ID}>
+                        <a href={"/products/" + product.ID}><span className="BoxLink"></span></a>
+                        <ul>
+                            <li>{product.Name}</li>
+                            <li>Pris: {product.Price}</li>
+                            <li>Lagerstatus: {product.Stock}</li>
+                            <li>Kategori: {product.Category}</li>
+                        </ul>
                     </div>
                 )
             })
