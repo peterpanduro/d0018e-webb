@@ -6,18 +6,21 @@ class ProductList extends Component {
     constructor() {
         super();
         this.state = {
-            products: [],
+            products: []
         };
     }
 
 
     componentDidMount() {
+        const { match: { params } } = this.props;
+        console.log(this.props);
         fetch('http://localhost:3001/api/products').then(results => {
             return results.json();
         }).then(data => {
             let products = data.map((product) => {
                 return(
                     <div className="productItem" key ={product.ID}>
+                        <a href={"/products/" + product.ID}><span className="BoxLink"></span></a>
                         <ul>
                             <li>{product.Name}</li>
                             <li>Pris: {product.Price}</li>

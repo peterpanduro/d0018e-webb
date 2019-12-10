@@ -6,6 +6,7 @@ import Products from './views/Products'
 import Login from './views/Login'
 import RegisterProfile from './views/RegisterProfile'
 import SearchBox from './views/components/SearchBox'
+import ProductList from './views/components/ProductList';
 
 
 function App() {
@@ -39,6 +40,10 @@ function App() {
             <div className = "Content">
 
               <Switch>
+                <Route path="/products/category/:category_id" component={ProductList}>
+                  <Products/>
+                </Route>
+
                 <Route exact path="/products">
                   <Products />
                 </Route>
