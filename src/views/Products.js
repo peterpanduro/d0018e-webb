@@ -18,7 +18,7 @@ class Products extends Component{
     // this.setState({category_id: params.category_id});
 
     const query = queryString.parse(this.props.location.search);
-    console.log(query.q);
+    console.log(query.search);
 
     this.fetchProducts()
   }
