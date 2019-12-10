@@ -10,9 +10,10 @@ function Login() {
                 <h1>Logga in på datamerchstore AB</h1>
                 <h3>Med ett konto på datamerchstore AB kan du göra allt detta:</h3><br/>
                 <ul>
-                    <li>Spara din address</li>
-                    <li>Snabbare checkout</li>
-                    <li>Spara din kundkorg</li>
+                    <li>Spara din address</li> <br/> 
+                    <li>Snabbare checkout</li><br/>
+               
+                    <li>Spara din kundkorg</li><br/>
                     <li>Få sålda uppgifter</li>
                 </ul>
             </div>

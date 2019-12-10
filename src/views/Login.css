@@ -22,14 +22,19 @@
 }
 
 .otherBox li {
-    display: block;
-
+    display: flex;
+    font-size: 15px;
+}
+.otherBox ul {
+    line-height: 50px;
+    margin-left: 30px;
 }
 
 .otherBox li:before {
     content: '✓';
     font-size: 30px;
     color: green;
+    
 }
 
 .input-container {
@@ -40,7 +45,7 @@
     padding: 6px;
     margin-top: 13px;
     font-size: 17px;
-    width: 90%;
+    width: 100%;
 
 }
 
@@ -50,7 +55,8 @@
     border: none;
     padding: 15px 32px;
     text-align: center;
-    display: inline-block;
+    display: flex;
+    float: right;
     font-size: 16px;
     margin-top: 30px;
 }
