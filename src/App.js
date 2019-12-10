@@ -40,9 +40,7 @@ function App() {
             <div className = "Content">
 
               <Switch>
-                <Route path="/products/category/:category_id" component={ProductList}>
-                  <Products/>
-                </Route>
+                <Route path="/products/category/:category_id" component={Products} />
 
                 <Route exact path="/products">
                   <Products />

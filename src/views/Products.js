@@ -22,7 +22,7 @@ componentDidMount() {
       <div className="Products">
         <br></br>
         <Categories/>
-        {this.state.category_id}  
+        category_id: {this.state.category_id}  
         <ProductList category_id={this.state}/>
       </div>  
     );

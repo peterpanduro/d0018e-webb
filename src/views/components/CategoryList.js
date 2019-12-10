@@ -11,7 +11,7 @@ class Categories extends Component {
 
 
 componentDidMount() {
-  fetch('http://localhost:3001/api/category')
+  fetch('http://api.d0018e.pndro.se/category')
   .then(results => {
     return results.json();
   }).then(data => {
