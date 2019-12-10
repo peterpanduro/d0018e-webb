@@ -3,6 +3,7 @@ import Categories from './components/CategoryList';
 import ProductList from './components/ProductList';
 import './Products.css';
 import queryString from 'query-string';
+import { Link } from 'react-router-dom';
 
 
 class Products extends Component{
@@ -14,12 +15,9 @@ class Products extends Component{
   }
 
   componentDidMount() {
-    // const { match: { params } } = this.props;
-    // this.setState({category_id: params.category_id});
-
     const query = queryString.parse(this.props.location.search);
-    console.log(query.search);
-
+    const searchQuery = query.search;
+    console.log(searchQuery)
     this.fetchProducts()
   }
 
@@ -31,7 +29,11 @@ class Products extends Component{
       let products = data.map((product) => {
         return(
           <div className="productItem" key ={product.ID}>
-              <a href={"/products/" + product.ID}><span className="BoxLink"></span></a>
+              {/* <a href={"/products/" + product.ID}><span className="BoxLink"></span></a> */}
+              <Link to={{pathname: `/products/${product.ID}`, product: {
+                title: "Title", 
+                content: "Content",
+              }}} className="BoxLink"></Link>
               <ul>
                   <li>{product.Name}</li>
                   <li>Pris: {product.Price}</li>
