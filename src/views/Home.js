@@ -1,5 +1,6 @@
 import React from 'react';
-import Categories from './components/Categories';
+import Categories from './components/CategoryList';
+import Borders from './components/Borders';
 
 
 function Home() {
