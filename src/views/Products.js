@@ -7,28 +7,48 @@ class Products extends Component{
   constructor() {
     super();
     this.state = {
-        category_id: 0
+        products: []
     };
-}
+  }
 
-componentDidMount() {
-  //const { match: { params } } = this.props;
-  // this.setState({category_id: params.category_id}); // console.log(params.category_id)
-}
+  componentDidMount() {
+    // const { match: { params } } = this.props;
+    // this.setState({category_id: params.category_id});
+    this.products()
+  }
+
+  products = (append) => {
+    fetch('http://api.d0018e.pndro.se/products').then(results => {
+      return results.json();
+    }).then(data => {
+      let products = data.map((product) => {
+        return(
+          <div className="productItem" key ={product.ID}>
+              <a href={"/products/" + product.ID}><span className="BoxLink"></span></a>
+              <ul>
+                  <li>{product.Name}</li>
+                  <li>Pris: {product.Price}</li>
+                  <li>Lagerstatus: {product.Stock}</li>
+                  <li>Kategori: {product.Category}</li>
+              </ul>
+          </div>
+        )
+      })
+      this.setState({products: products});
+      console.log(this.state.products)
+    })
+  }
 
   render() {
-    //const { match: { params } } = this.props;
-    //console.log(this.state.category_id);
     return (
       <div className="Products">
         <br/>
-        
         <Categories/><br/>
         <div className = "container2">
           <div className = "border">
             <p>Populära varor</p>
           </div>
-          <ProductList/><br/>
+          <ProductList products={this.state.products}/><br/>
         </div>
       </div>
     );
