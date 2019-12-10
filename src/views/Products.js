@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Categories from './components/CategoryList';
 import ProductList from './components/ProductList';
+import './Products.css';
 
 class Products extends Component{
   constructor() {
@@ -20,13 +21,18 @@ componentDidMount() {
     //console.log(this.state.category_id);
     return (
       <div className="Products">
-        <br></br>
-        <Categories/>
-        category_id: {this.state.category_id}  
-        <ProductList category_id={this.state}/>
-      </div>  
+        <br/>
+        
+        <Categories/><br/>
+        <div className = "container2">
+          <div className = "border">
+            <p>Populära varor</p>
+          </div>
+          <ProductList/><br/>
+        </div>
+      </div>
     );
-    }
+  }
 }
 
 export default Products;
