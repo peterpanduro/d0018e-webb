@@ -50,6 +50,14 @@ li a {
   text-decoration: none;
 }
 
+.Categories li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
 .App-link {
   color: #09d3ac;
 }

@@ -1,7 +1,6 @@
 import React from 'react';
-import Categories from './components/Categories';
 import ProductList from './components/ProductList';
-
+import Categories from './components/CategoryList';
 
 function Home() {
   return (

@@ -50,11 +50,15 @@ function App() {
                 </Route>
                 <Route exact path ="/register">
                   <RegisterProfile />
+                </Route> 
+                <Route exact path ="/category/:id">
+                    <RegisterProfile />
                 </Route>
               </Switch>
             </div>
           </div>
 
+           
         </body>
       </div>
     </Router>
