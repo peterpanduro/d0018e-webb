@@ -6,8 +6,8 @@ function SearchBox() {
   return (
     <div className = 'SearchBox'>
         <div className = "search-container">
-            <form action ="google.com">
-                <input type="text" placeholder="Sök produkt.." name="search"></input>
+            <form action ="products">
+                <input type="text" placeholder="Sök produkt.." name="q"></input>
             </form>
         </div>
     </div>
