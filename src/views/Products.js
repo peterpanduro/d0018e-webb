@@ -14,11 +14,12 @@ class Products extends Component{
   componentDidMount() {
     // const { match: { params } } = this.props;
     // this.setState({category_id: params.category_id});
-    this.products()
+    this.fetchProducts()
   }
 
-  products = (append) => {
-    fetch('http://api.d0018e.pndro.se/products').then(results => {
+  fetchProducts = (append) => {
+    append = append === undefined ? "" : append
+    fetch(process.env.REACT_APP_API_HOST + '/products' + append).then(results => {
       return results.json();
     }).then(data => {
       let products = data.map((product) => {
@@ -35,7 +36,6 @@ class Products extends Component{
         )
       })
       this.setState({products: products});
-      console.log(this.state.products)
     })
   }
 
