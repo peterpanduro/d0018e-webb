@@ -18,7 +18,7 @@ componentDidMount() {
     let x = data.map((y) => {
       return(
         <li key={y.ID}>
-          <a href={"localhost:3002/products/" + y.ID}>{y.Name}</a>
+          <a href={"localhost:3002/products/:" + y.ID}>{y.Name}</a>
         </li>
       )
     })

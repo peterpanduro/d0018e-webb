@@ -12,20 +12,18 @@ class ProductList extends Component {
 
 
     componentDidMount() {
-        fetch('http://api.d0018e.pndro.se/products').then(results => {
+        fetch('http://localhost:3001/api/products').then(results => {
             return results.json();
         }).then(data => {
             let products = data.map((product) => {
                 return(
-                    <div className="productItem">
-                        <div key ={product.ID}>
-                            <ul>
-                                <li>{product.Name}</li>
-                                <li>Pris: {product.Price}</li>
-                                <li>Lagerstatus: {product.Stock}</li>
-                                <li>Kategori: {product.Category}</li>
-                            </ul>
-                        </div>
+                    <div className="productItem" key ={product.ID}>
+                        <ul>
+                            <li>{product.Name}</li>
+                            <li>Pris: {product.Price}</li>
+                            <li>Lagerstatus: {product.Stock}</li>
+                            <li>Kategori: {product.Category}</li>
+                        </ul>
                     </div>
                 )
             })
