@@ -29,10 +29,9 @@ class Products extends Component{
       let products = data.map((product) => {
         return(
           <div className="productItem" key ={product.ID}>
-              {/* <a href={"/products/" + product.ID}><span className="BoxLink"></span></a> */}
               <Link to={{pathname: `/products/${product.ID}`, product: {
-                title: "Title", 
-                content: "Content",
+                name: product.Name, 
+                description: product.Description,
               }}} className="BoxLink"></Link>
               <ul>
                   <li>{product.Name}</li>
