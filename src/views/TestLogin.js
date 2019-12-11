@@ -9,7 +9,7 @@ class TestLogin extends Component {
       }
 
     async componentDidMount() {
-            const response = await fetch('http://api.d0018e.pndro.se/user/login', {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/user/login`, {
                 method: 'POST',
                 headers: {
                     'e-mail' : 'magda',

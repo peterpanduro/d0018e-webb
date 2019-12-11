@@ -17,13 +17,13 @@ class Products extends Component{
   componentDidMount() {
     const query = queryString.parse(this.props.location.search);
     const searchQuery = query.search;
-    console.log(searchQuery)
-    this.fetchProducts()
+    this.fetchProducts(searchQuery);
   }
 
   fetchProducts = (append) => {
-    append = append === undefined ? "" : append
-    fetch(process.env.REACT_APP_API_HOST + '/products' + append).then(results => {
+    append = append === undefined ? "" : `?search=${append}`;
+    const query = `${process.env.REACT_APP_API_HOST}/products${append}`;
+    fetch(query).then(results => {
       return results.json();
     }).then(data => {
       let products = data.map((product) => {
