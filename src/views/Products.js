@@ -16,14 +16,18 @@ class Products extends Component{
 
   componentDidMount() {
     const query = queryString.parse(this.props.location.search);
-    const searchQuery = query.search;
+    const key = Object.keys(query)[0];
+    const searchQuery = key ? `?${key}=${query[key]}` : "";
     this.fetchProducts(searchQuery);
   }
 
   fetchProducts = (append) => {
-    append = append === undefined ? "" : `?search=${append}`;
     const query = `${process.env.REACT_APP_API_HOST}/products${append}`;
-    fetch(query).then(results => {
+    const method = 'GET';
+    let config = {
+      method
+    };
+    fetch(query, config).then(results => {
       return results.json();
     }).then(data => {
       let products = data.map((product) => {

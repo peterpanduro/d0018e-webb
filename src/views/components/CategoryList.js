@@ -11,14 +11,14 @@ class Categories extends Component {
 
 
 componentDidMount() {
-  fetch('http://api.d0018e.pndro.se/products')
+  fetch('http://api.d0018e.pndro.se/categories')
   .then(results => {
     return results.json();
   }).then(data => {
     let x = data.map((y) => {
       return(
         <li key={y.ID}>
-          <a href={"/products/category/" + y.ID}>{y.Name}</a>
+          <a href={"/products?category=" + y.ID}>{y.Name}</a>
         </li>
       )
     })
