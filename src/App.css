@@ -17,6 +17,7 @@
   align-items: center;
   margin: 0 auto;
 }
+
 .App-logo {
   height: 40vmin;
 }
@@ -29,15 +30,16 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
- 
+  color: white; 
 }
+
  ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
+
 li {
   float:left;
 }
