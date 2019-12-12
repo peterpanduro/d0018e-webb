@@ -46,8 +46,13 @@
     margin-top: 13px;
     font-size: 17px;
     width: 100%;
+}
 
-
+.input-container input[type = password] {
+    padding: 6px;
+    margin-top: 13px;
+    font-size: 17px;
+    width: 100%;
 }
 
 .input-container input[type = submit] {

@@ -45,13 +45,34 @@ class Testytest extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handler}>
-                <h1>{this.state.email}</h1>
-                <h1>{this.state.password}</h1>
-                <input type='text' onChange={this.updateEmail}/>
-                <input type= 'text' onChange={this.updatePassword}/>
-                <input type='submit'/>
-            </form>
+            
+            <div className="TestyTest">
+            <div className = "container">
+                <div className = "otherBox">
+                    <h1>Logga in på datamerchstore AB</h1>
+                    <h3>Med ett konto på datamerchstore AB kan du göra allt detta:</h3><br/>
+                    <ul>
+                        <li>Spara din address</li> <br/> 
+                        <li>Snabbare checkout</li><br/>
+                   
+                        <li>Spara din kundkorg</li><br/>
+                        <li>Få sålda uppgifter</li>
+                    </ul>
+                </div>
+                <div className = "loginBox">
+                    <h2>Logga in</h2>
+                    <div className = "input-container">
+                        <form onSubmit={this.handler}>
+                            <h3>E-post address</h3>
+                            <input type="text" onChange={this.updateEmail}></input>
+                            <h3>Lösenord</h3>
+                            <input type="password" onChange={this.updatePassword}></input>
+                            <input type="submit" value="Logga in"></input>
+                        </form> 
+                    </div>
+                </div>  
+            </div>
+        </div>
           );
     }
 }
