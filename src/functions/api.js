@@ -31,3 +31,16 @@ export const getProducts = (append, callback) => {
         })
     })
 }
+
+export const getCategories = (callback) => {
+    fetch(`${api_url}/categories`, {
+        method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+    }).then(response => {
+        response.json().then(json => {
+            callback(response.status, json);
+        })
+    })
+}

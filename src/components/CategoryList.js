@@ -1,42 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import '../css/CategoryList.css';
-//import { Link } from 'react-router-dom'
+import { getCategories } from '../functions/api'
 
-class Categories extends Component {
-  constructor(){
-    super();
-    this.state = {
-      categories: [],
-    };
+export default function CategoryList(props) {
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const [categories, setCategories] = useState([]);
+
+  const fetchCategories = () => {
+
+    console.log(props)
+
+    getCategories((status, data) => {
+      if (status === 200) {
+        setCategories(data);
+      } else {
+        console.log(data);
+      }
+    })
   }
 
-
-componentDidMount() {
-  fetch('http://api.d0018e.pndro.se/categories')
-  .then(results => {
-    return results.json();
-  }).then(data => {
-    let x = data.map((y) => {
-      return(
-        <li key={y.ID}>
-          <a href={"/products?category=" + y.ID}>{y.Name}</a>
-          {/*           <Link to={"/products?category=" + y.ID} onClick={() => window.location.reload()}>{y.Name}</Link> */}
-        </li>
-      )
-    })
-    this.setState({categories: x});
-  })
-}
-
-render() {
   return (
     <div className="Categories">
       <h2>Upptäck kategorier</h2>
       <ul>
-      {this.state.categories}
+        {categories.map(category => (
+          <li key={category.ID}>
+          <Link to={"/products?category=" + category.ID} onClick={() => props.reloadProducts()}>{category.Name}</Link>
+        </li>
+        ))}
       </ul>
     </div>
   )
 }
-}
-export default Categories;

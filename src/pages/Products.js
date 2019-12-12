@@ -9,16 +9,17 @@ export default function Products(props) {
 
 useEffect(() => {
   fetchProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
   const [products, setProducts] = useState([]);
 
   const fetchProducts = () => {
+    console.log("products are being fetched")
     const query = queryString.parse(props.location.search);
     const key = Object.keys(query)[0];
     const searchQuery = key ? `?${key}=${query[key]}` : "";
     getProducts(searchQuery, (status, data) => {
-      console.log(props.location.query)
       if (status === 200) {
         setProducts(data);
       } else {
@@ -30,7 +31,7 @@ useEffect(() => {
   return (
       <div className="products-parent">
         <br/>
-        <Categories/><br/>
+        <Categories reloadProducts={fetchProducts}/><br/>
         <div className = "products-container">
           <div className = "border">
             <p>Sweet merch</p>

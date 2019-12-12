@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 import '../css/ProductList.css';
 
@@ -15,7 +15,7 @@ export default function ProductList(props) {
                     }}} className="BoxLink"></Link>
                     <ul>
                         <li>
-                        <img src= "https://www.kingarthurflour.com/sites/default/files/recipe_legacy/325-3-large.jpg"></img><br/>
+                        <img src= "https://www.kingarthurflour.com/sites/default/files/recipe_legacy/325-3-large.jpg" alt="product"></img><br/>
                         {product.Price} kr
                         </li>
                         <li>{product.Name}</li>

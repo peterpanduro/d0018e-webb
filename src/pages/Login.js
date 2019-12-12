@@ -37,7 +37,7 @@ class Login extends Component {
             }
         }).then(response => {
             response.json().then(json => {
-                if (response.status == "200") {
+                if (response.status === 200) {
                     Cookies.set('email', this.state.email,{expires: 30});
                     Cookies.set('password', this.state.password,{expires: 30});
                     Cookies.set('jwt', json.jwt, {expires: 30});

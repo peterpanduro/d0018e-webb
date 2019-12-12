@@ -41,7 +41,7 @@ constructor() {
   render() {
     return (
       <div className="product">
-          <img src= "https://www.kingarthurflour.com/sites/default/files/recipe_legacy/325-3-large.jpg"></img>
+          <img src="https://www.kingarthurflour.com/sites/default/files/recipe_legacy/325-3-large.jpg" alt="product"></img>
           <div className="text-container">
             <h1>{this.state.price} kr</h1>
             <h2>{this.state.name}</h2>

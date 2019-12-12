@@ -8,7 +8,7 @@ import Header from './components/Header'
 import Product from './pages/Product'
 import Login from './pages/Login'
 
-function App() {
+export default function App() {
   return (
     <Router>
       <div className="App">
@@ -16,7 +16,7 @@ function App() {
         <div className ="Background">
           <div className = "Content">
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={Products} />
               <Route exact path="/products" component={Products} />
               <Route exact path="/products/:product_id" component={Product} />
               <Route exact path ="/login" component={Login} />
@@ -28,5 +28,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

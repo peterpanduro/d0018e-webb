@@ -23,7 +23,7 @@ function RegisterProfile() {
     const registerProfile = e => {
         e.preventDefault();
         registerUser(name, email, password, (status, json) => {
-            if (status == 200) {
+            if (status === 200) {
 
             } else {
                 // TODO Show error to user
