@@ -17,22 +17,21 @@ class Products extends Component{
   componentDidMount() {
     const query = queryString.parse(this.props.location.search);
     const searchQuery = query.search;
-    console.log(searchQuery)
-    this.fetchProducts()
+    this.fetchProducts(searchQuery);
   }
 
   fetchProducts = (append) => {
-    append = append === undefined ? "" : append
-    fetch(process.env.REACT_APP_API_HOST + '/products' + append).then(results => {
+    append = append === undefined ? "" : `?search=${append}`;
+    const query = `${process.env.REACT_APP_API_HOST}/products${append}`;
+    fetch(query).then(results => {
       return results.json();
     }).then(data => {
       let products = data.map((product) => {
         return(
           <div className="productItem" key ={product.ID}>
-              {/* <a href={"/products/" + product.ID}><span className="BoxLink"></span></a> */}
               <Link to={{pathname: `/products/${product.ID}`, product: {
-                title: "Title", 
-                content: "Content",
+                name: product.Name, 
+                description: product.Description,
               }}} className="BoxLink"></Link>
               <ul>
                   <li>{product.Name}</li>
