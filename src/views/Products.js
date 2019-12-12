@@ -38,10 +38,13 @@ class Products extends Component{
                 description: product.Description,
               }}} className="BoxLink"></Link>
               <ul>
+                  <li>
+                    <img src= "https://www.kingarthurflour.com/sites/default/files/recipe_legacy/325-3-large.jpg"></img><br/>
+                    {product.Price} kr
+                  </li>
+
                   <li>{product.Name}</li>
-                  <li>Pris: {product.Price}</li>
                   <li>Lagerstatus: {product.Stock}</li>
-                  <li>Kategori: {product.Category}</li>
               </ul>
           </div>
         )
