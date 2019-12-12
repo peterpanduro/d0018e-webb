@@ -5,7 +5,6 @@ import './Login.css';
 function RegisterProfile() {
   return (
     <div className="RegisterProfile">
-      <div className = "container">
             <div className = "otherBox">
                 <h1>Logga in på datamerchstore AB</h1>
                 <h3>Med ett konto på datamerchstore AB kan du göra allt detta:</h3><br/>
@@ -32,7 +31,6 @@ function RegisterProfile() {
                 </div>
             </div>
         </div>
-    </div>
   );    
 }
 

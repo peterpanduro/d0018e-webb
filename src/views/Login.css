@@ -4,6 +4,12 @@
     text-align: left;
 }
 
+.RegisterProfile {
+    display:flex;
+    flex-wrap: nowrap;
+    text-align: left;
+}
+
 .loginBox {
     background-color: #f2f2f2;
     width: 40%;
