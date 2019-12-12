@@ -9,28 +9,28 @@ class TestLogin extends Component {
       }
 
     async componentDidMount() {
-            const response = await fetch('http://api.d0018e.pndro.se/user/login', {
+            fetch('http://api.d0018e.pndro.se/user/login', {
                 method: 'POST',
                 headers: {
-                    'e-mail' : 'magda',
-                    'password' : 'hemligtlosen'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'email': 'larpet-5@student.ltu.se',
+                    'password': 'gRoot'
                 }
-            });
-            this.setState({testlogin: await response.json()
-            });
-        
+            }).then(response => {
+                response.json().then(json => {
+                    console.log(json);
+                    console.log(response.status);
+                })
+            })
     }
   
     render() {
       return ( 
         <div className = "TestLogin">
-            <h1>yoyoyo</h1>
-            <h1>{this.state.testlogin}</h1>
         </div>
       )
-    
-  }
-        
+  }       
 }
 
 export default TestLogin;
