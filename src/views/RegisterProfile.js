@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
-
+import { registerUser } from '../functions/api'
 
 function RegisterProfile() {
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const updateName = e => {
+        setName(e.target.value)
+    }
+
+    const updateEmail = e => {
+        setEmail(e.target.value)
+    }
+
+    const updatePassword = e => {
+        setPassword(e.target.value)
+    }
+
+    const registerProfile = e => {
+        e.preventDefault();
+        registerUser(name, email, password, (status, json) => {
+            console.log(json);
+        })
+    }
+
   return (
     <div className="RegisterProfile">
       <div className = "container">
@@ -20,13 +44,13 @@ function RegisterProfile() {
             <div className = "loginBox">
                 <h2>Skapa konto</h2>
                 <div className = "input-container"> 
-                    <form action="www.google.com">
+                    <form onSubmit={registerProfile}>
                         <h3>Namn</h3>
-                        <input type="text" name="Name"></input>
+                        <input type="text" name="Name" value={name} onChange={updateName}></input>
                         <h3>E-post address</h3>
-                        <input type="text" name="Email"></input>
+                        <input type="text" name="Email" value={email} onChange={updateEmail}></input>
                         <h3>Lösenord</h3>
-                        <input type="text" name="Password"></input>
+                        <input type="password" name="Password" value={password} onChange={updatePassword}></input>
                         <input type="submit" value="Skapa konto"></input>
                     </form> 
                 </div>
