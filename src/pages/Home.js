@@ -2,7 +2,7 @@ import React from 'react';
 import ProductList from '../components/ProductList';
 import Categories from '../components/CategoryList';
 
-function Home() {
+export default function Home() {
   return (
     <div className="Home">
       <br></br>
@@ -12,5 +12,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

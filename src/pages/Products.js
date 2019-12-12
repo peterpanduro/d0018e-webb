@@ -1,72 +1,42 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
+import queryString from 'query-string';
+import '../css/Products.css';
 import Categories from '../components/CategoryList';
 import ProductList from '../components/ProductList';
-import '../css/Products.css';
-import queryString from 'query-string';
-import { Link } from 'react-router-dom';
+import { getProducts } from '../functions/api'
 
+export default function Products(props) {
 
-class Products extends Component{
-  constructor() {
-    super();
-    this.state = {
-        products: []
-    };
-  }
+useEffect(() => {
+  fetchProducts();
+}, []);
 
-  componentDidMount() {
-    const query = queryString.parse(this.props.location.search);
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = () => {
+    const query = queryString.parse(props.location.search);
     const key = Object.keys(query)[0];
     const searchQuery = key ? `?${key}=${query[key]}` : "";
-    this.fetchProducts(searchQuery);
-  }
-
-  fetchProducts = (append) => {
-    const query = `http://api.d0018e.pndro.se/products${append}`;
-    const method = 'GET';
-    let config = {
-      method
-    };
-    fetch(query, config).then(results => {
-      return results.json();
-    }).then(data => {
-      let products = data.map((product) => {
-        return(
-          <div className="productItem" key ={product.ID}>
-              <Link to={{pathname: `/products/${product.ID}`, product: {
-                name: product.Name, 
-                description: product.Description,
-              }}} className="BoxLink"></Link>
-              <ul>
-                  <li>
-                    <img src= "https://www.kingarthurflour.com/sites/default/files/recipe_legacy/325-3-large.jpg"></img><br/>
-                    {product.Price} kr
-                  </li>
-
-                  <li>{product.Name}</li>
-                  <li>Lagerstatus: {product.Stock}</li>
-              </ul>
-          </div>
-        )
-      })
-      this.setState({products: products});
+    getProducts(searchQuery, (status, data) => {
+      console.log(props.location.query)
+      if (status === 200) {
+        setProducts(data);
+      } else {
+        console.log(data);
+      }
     })
   }
 
-  render() {
-    return (
-      <div className="Products">
+  return (
+      <div className="products-parent">
         <br/>
         <Categories/><br/>
-        <div className = "container2">
+        <div className = "products-container">
           <div className = "border">
-            <p>Populära varor</p>
+            <p>Sweet merch</p>
           </div>
-          <ProductList products={this.state.products}/><br/>
+          <ProductList products={products}/><br/>
         </div>
       </div>
-    );
-  }
-}
-
-export default Products;
+  )
+};
