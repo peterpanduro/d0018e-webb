@@ -3,11 +3,13 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
 
+}
 .border {
     background-color: yellow;
     width: 100%;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
 }
 
 .container2{
@@ -16,9 +18,10 @@
     width: 95%;
     border-style: solid;
     border-width: 1px;
+    color: rgb(150, 148, 148)
 }
 
 .border p {
     text-align: center;
-
+    color: #333
 }

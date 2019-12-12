@@ -1,18 +1,19 @@
 .Categories {
     background-color: white;
-    border-style: solid;    
-    border-color: #333;  
+    border-style: ridge;    
+    border-color: rgb(150, 148, 148);  
     border-width: 1px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+  
   }
 
  .Categories li {
-    font-size: 18px;
+    font-size: 16px;
     float: center;
-    color: #333;
-    padding: 14px 16px;
+    color: rgb(150, 148, 148);
+    padding: 0px 15px;
   }
   
