@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Categories from './components/CategoryList';
-import ProductList from './components/ProductList';
-import './Products.css';
+import Categories from '../components/CategoryList';
+import ProductList from '../components/ProductList';
+import '../css/Products.css';
 import queryString from 'query-string';
 import { Link } from 'react-router-dom';
 

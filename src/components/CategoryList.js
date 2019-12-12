@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './CategoryList.css';
-import { Link } from 'react-router-dom'
+import '../css/CategoryList.css';
+//import { Link } from 'react-router-dom'
 
 class Categories extends Component {
   constructor(){

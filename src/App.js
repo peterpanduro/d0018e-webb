@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import './App.css';
-import Home from './views/Home'
-import Products from './views/Products'
-import RegisterProfile from './views/RegisterProfile'
-import Header from './views/components/Header'
-import Product from './views/Product'
-import Login from './views/Login'
+import './css/App.css';
+import Home from './pages/Home'
+import Products from './pages/Products'
+import RegisterProfile from './pages/RegisterProfile'
+import Header from './components/Header'
+import Product from './pages/Product'
+import Login from './pages/Login'
 
 function App() {
   return (

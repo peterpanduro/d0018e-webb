@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './ProductList.css';
+import '../css/ProductList.css';
 
 
 class ProductList extends Component {
