@@ -22,7 +22,7 @@ class Products extends Component{
   }
 
   fetchProducts = (append) => {
-    const query = `${process.env.REACT_APP_API_HOST}/products${append}`;
+    const query = `http://api.d0018e.pndro.se/products${append}`;
     const method = 'GET';
     let config = {
       method
