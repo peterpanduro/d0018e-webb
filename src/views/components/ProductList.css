@@ -1,6 +1,5 @@
 .productItem {
     background-color: white;
-
     display: float;
     float: left;
     max-width: 300px;
@@ -8,7 +7,6 @@
     position: relative;
   }
   
-
  .productItem ul > li {  
      justify-self: left;   
      float: none;
@@ -17,7 +15,6 @@
     color: #333;
     padding: 5px 10px;
     text-align: left;
-
 }
 
 .BoxLink {
@@ -26,7 +23,6 @@
     height:100%;
     top:0;
     left: 0;
-
     z-index: 1;
 }
 
