@@ -1,51 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBox from './SearchBox'
 import Cookies from 'js-cookie'
 
-class Header extends Component {
+export default function Header() {
 
-    constructor() {
-        super();
-    }
-
-    logout() {
+    const logout = () => {
         Cookies.remove("jwt");
     }
 
-    logoutButtonPressed(e) {
-        this.logout();
-        this.forceUpdate();
+    const logoutButtonPressed = e => {
+        logout();
+        window.location.assign("/");
     }
 
-    render() {
-        const jwt = Cookies.get('jwt');
-        var profile;
-        if (jwt) {
-            profile =(
-                <>
-                    <li>
-                        <Link to="/account">Konto</Link>
-                    </li>
-                    <li>
-                        <Link to="/" onClick={this.logoutButtonPressed.bind(this)}>Logga ut</Link>
-                    </li>
-                </>
-            )
-        } else {
-           profile = (
-                <>
-                    <li>
-                        <Link to="/login">Logga in</Link>
-                    </li>
-                    <li>
-                        <Link to="/register">Registrera profil</Link>
-                    </li>
-                </>
-            ) 
-        }
-        return (
-            <header className="App-header">
+    return (
+        <header className="App-header">
                 <nav className="Navbar">
                     <ul>
                     <li><SearchBox/></li>
@@ -55,12 +25,27 @@ class Header extends Component {
                     <li>
                         <Link to="/products">Produkter</Link>
                     </li>
-                    {profile}
+                        {Cookies.get("jwt") ? (
+                            <>
+                                <li>
+                                    <Link to="/account">Konto</Link>
+                                </li>
+                                <li>
+                                    <Link to="/" onClick={logoutButtonPressed}>Logga ut</Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <Link to="/login">Logga in</Link>
+                                </li>
+                                <li>
+                                    <Link to="/register">Registrera profil</Link>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </nav>
             </header>
-        );
-    }
+    );
 }
-
-export default Header;

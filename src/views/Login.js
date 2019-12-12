@@ -35,14 +35,14 @@ class Login extends Component {
                 'email': this.state.email,
                 'password': this.state.password
             }
-            
         }).then(response => {
             response.json().then(json => {
                 if (response.status == "200") {
                     Cookies.set('email', this.state.email,{expires: 30});
                     Cookies.set('password', this.state.password,{expires: 30});
                     Cookies.set('jwt', json.jwt, {expires: 30});
-                    window.location.assign("/");
+                    //window.location.assign("/");
+                    this.forceUpdate();
                 } else {
                     console.log ("ajdo");
                     // TODO: Show someting to the user
