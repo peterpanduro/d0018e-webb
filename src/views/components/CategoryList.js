@@ -11,8 +11,12 @@ class Categories extends Component {
 
 
 componentDidMount() {
+<<<<<<< HEAD
   /*
   fetch('http://api.d0018e.pndro.se/category')
+=======
+  fetch('http://api.d0018e.pndro.se/products')
+>>>>>>> 4a2eb2e96f9cc0f35bb5155116fe1fa2a26d802e
   .then(results => {
     return results.json();
   }).then(data => {

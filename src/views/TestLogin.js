@@ -12,6 +12,7 @@ class TestLogin extends Component {
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/user/login`, {
                 method: 'POST',
                 headers: {
+<<<<<<< HEAD
                     'email' : 'larpet-5@student.ltu.se',
                     'password' : 'Root'
                 }
@@ -19,18 +20,27 @@ class TestLogin extends Component {
             //this.setState({testlogin: await response.json()
             //});
         
+=======
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'email': 'larpet-5@student.ltu.se',
+                    'password': 'gRoot'
+                }
+            }).then(response => {
+                response.json().then(json => {
+                    console.log(json);
+                    console.log(response.status);
+                })
+            })
+>>>>>>> 4a2eb2e96f9cc0f35bb5155116fe1fa2a26d802e
     }
   
     render() {
       return ( 
         <div className = "TestLogin">
-            <h1>yoyoyo</h1>
-            <h1>{this.state.testlogin}</h1>
         </div>
       )
-    
-  }
-        
+  }       
 }
 
 export default TestLogin;
