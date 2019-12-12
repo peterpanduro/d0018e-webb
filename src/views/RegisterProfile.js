@@ -1,15 +1,10 @@
 import React from 'react';
 import './Login.css';
-import './TestLogin';
-import Testytest from './Testytest';
-import TestLogin from './TestLogin';
-
 
 
 function RegisterProfile() {
   return (
     <div className="RegisterProfile">
-        <Testytest/>
       <div className = "container">
             <div className = "otherBox">
                 <h1>Logga in på datamerchstore AB</h1>
