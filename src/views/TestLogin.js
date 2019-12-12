@@ -12,12 +12,12 @@ class TestLogin extends Component {
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/user/login`, {
                 method: 'POST',
                 headers: {
-                    'e-mail' : 'magda',
-                    'password' : 'hemligtlosen'
+                    'email' : 'larpet-5@student.ltu.se',
+                    'password' : 'Root'
                 }
             });
-            this.setState({testlogin: await response.json()
-            });
+            //this.setState({testlogin: await response.json()
+            //});
         
     }
   

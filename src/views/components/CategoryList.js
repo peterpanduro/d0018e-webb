@@ -11,6 +11,7 @@ class Categories extends Component {
 
 
 componentDidMount() {
+  /*
   fetch('http://api.d0018e.pndro.se/category')
   .then(results => {
     return results.json();
@@ -24,6 +25,7 @@ componentDidMount() {
     })
     this.setState({categories: x});
   })
+  */
 }
 
 render() {
