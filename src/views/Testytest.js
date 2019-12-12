@@ -38,18 +38,14 @@ class Testytest extends Component {
             
         }).then(response => {
             response.json().then(json => {
-                console.log(json);
-                console.log(response.status);
-                console.log(this.state.email);
                 if (response.status == "200") {
                     Cookies.set('email', this.state.email,{expires: 30});
                     Cookies.set('password', this.state.password,{expires: 30});
                     Cookies.set('jwt', json.jwt, {expires: 30});
-
-                    console.log('vad bra');
-                    console.log(Cookies.get());
+                    window.location.assign("/");
                 } else {
                     console.log ("ajdo");
+                    // TODO: Show someting to the user
                 }
             })
         })

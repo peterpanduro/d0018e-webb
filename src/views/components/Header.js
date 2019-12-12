@@ -5,8 +5,17 @@ import Cookies from 'js-cookie'
 
 class Header extends Component {
 
+    constructor() {
+        super();
+    }
+
     logout() {
         Cookies.remove("jwt");
+    }
+
+    logoutButtonPressed(e) {
+        this.logout();
+        this.forceUpdate();
     }
 
     render() {
@@ -14,25 +23,25 @@ class Header extends Component {
         var profile;
         if (jwt) {
             profile =(
-                <div>
+                <>
                     <li>
                         <Link to="/account">Konto</Link>
                     </li>
                     <li>
-                        <Link to="/" onClick={this.logout}>Logga ut</Link>
+                        <Link to="/" onClick={this.logoutButtonPressed.bind(this)}>Logga ut</Link>
                     </li>
-                </div>
+                </>
             )
         } else {
            profile = (
-                <div>
+                <>
                     <li>
                         <Link to="/login">Logga in</Link>
                     </li>
                     <li>
                         <Link to="/register">Registrera profil</Link>
                     </li>
-                </div>
+                </>
             ) 
         }
         return (
