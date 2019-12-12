@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './CategoryList.css';
+import { Link } from 'react-router-dom'
 
 class Categories extends Component {
   constructor(){
@@ -19,6 +20,7 @@ componentDidMount() {
       return(
         <li key={y.ID}>
           <a href={"/products?category=" + y.ID}>{y.Name}</a>
+          {/*           <Link to={"/products?category=" + y.ID} onClick={() => window.location.reload()}>{y.Name}</Link> */}
         </li>
       )
     })
