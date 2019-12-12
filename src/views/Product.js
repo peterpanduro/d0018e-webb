@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './Product.css';
 
 class Product extends Component{
   
@@ -6,7 +7,11 @@ constructor() {
   super();
     this.state = {
         name: "",
-        description: ""
+        description: "",
+        price: "",
+        discountprice: "",
+        newprice: "",
+        prevprice: ""
     };
   }
 
@@ -18,7 +23,7 @@ constructor() {
       } else {
         const product = this.props.location.product;
         console.log(product);
-        this.setState({name: product.name, description: product.description})
+        this.setState({name: product.name, description: product.description, price: product.price, discountprice: product.discountprice})
       }
   }
 
@@ -29,15 +34,20 @@ constructor() {
     }).then(data => {
       const p = data[0];
       console.log(p);
-      this.setState({name: p.Name, description: p.Description});
+      this.setState({name: p.Name, description: p.Description, price: p.Price, discountprice: p.Discountprice});
     })
   }
 
   render() {
     return (
       <div className="product">
-          <h1>{this.state.name}</h1>
-          <p>{this.state.description}</p>
+          <img src= "https://www.kingarthurflour.com/sites/default/files/recipe_legacy/325-3-large.jpg"></img>
+          <div className="text-container">
+            <h1>{this.state.price} kr</h1>
+            <h2>{this.state.name}</h2>
+            <p>{ this.state.description}</p>
+            <input type = 'submit' value= 'Lägg i kundkorgen'/>
+          </div>
       </div>
     );
   }
