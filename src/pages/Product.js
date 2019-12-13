@@ -8,10 +8,10 @@ constructor() {
     this.state = {
         name: "",
         description: "",
-        price: "",
-        discountprice: "",
-        newprice: "",
-        prevprice: ""
+        price: 0,
+        discountPrice: 0,
+        imgURL: "",
+        imgCaption: ""
     };
   }
 
@@ -23,7 +23,7 @@ constructor() {
       } else {
         const product = this.props.location.product;
         console.log(product);
-        this.setState({name: product.name, description: product.description, price: product.price, discountprice: product.discountprice})
+        this.setState({name: product.name, description: product.description, price: product.price, discountPrice: product.discountPrice, imgURL: product.url, imgCaption: product.caption})
       }
   }
 
@@ -34,16 +34,31 @@ constructor() {
     }).then(data => {
       const p = data[0];
       console.log(p);
-      this.setState({name: p.Name, description: p.Description, price: p.Price, discountprice: p.Discountprice});
+      this.setState({name: p.Name, description: p.Description, price: p.Price, discountPrice: p.DiscountPrice,imgURL: p.url, imgCaption: p.caption});
     })
   }
 
   render() {
+    console.log(this.state);
+
+    let priceText;
+
+    if(this.state.price !== this.state.discountPrice)
+    {
+    priceText = <div><h2>save {Math.trunc(100 -(this.state.discountPrice / this.state.price) * 100)}%!</h2><br/><h1><strike>{this.state.price}kr</strike><br/>{this.state.discountPrice}kr</h1></div>;
+    }
+    else
+    {
+      priceText = <div><h1>{this.state.price}kr</h1></div>
+    }
+
     return (
+
+
       <div className="product">
-          <img src="https://www.kingarthurflour.com/sites/default/files/recipe_legacy/325-3-large.jpg" alt="product"></img>
+          <img src={this.state.imgURL} alt={this.state.imgCaption}></img>
           <div className="text-container">
-            <h1>{this.state.price} kr</h1>
+            {priceText}
             <h2>{this.state.name}</h2>
             <p>{ this.state.description}</p>
             <input type = 'submit' value= 'Lägg i kundkorgen'/>
