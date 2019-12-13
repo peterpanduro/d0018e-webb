@@ -32,6 +32,19 @@ export const getProducts = (append, callback) => {
     })
 }
 
+export const getProduct = (id, callback) => {
+    fetch(`${api_url}/product/${id}`, {
+        method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+    }).then(response => {
+        response.json().then(json => {
+            callback(response.status, json);
+        })
+    })
+}
+
 export const getCategories = (callback) => {
     fetch(`${api_url}/categories`, {
         method: 'GET',

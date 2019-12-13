@@ -8,7 +8,6 @@ export default function ProductList(props) {
         <div>
             {props.products.map(product => (
                 <div className="productItem" key ={product.ID}>
-                    {console.log(product)}
                     <Link to={{pathname: `/products/${product.ID}`, product: {
                         name: product.Name, 
                         description: product.Description,

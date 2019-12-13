@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Product.css';
 import CommentList from '../components/CommentList';
+import { getProduct, getComments } from '../functions/api'
 
 export default function Product(props) {
   
   useEffect(() => {
-    initData();
+    fetchProduct();
+    fetchComments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -16,6 +18,7 @@ export default function Product(props) {
   const [discountPrice, setDiscountPrice] = useState(0);
   const [imgURL, setImgURL] = useState("");
   const [imgCaption, setImgCaption] = useState("");
+  const [comments, setComments] = useState([]);
 
   const setState = (_id, _name, _description, _price, _discountPrice, _imgUrl, _imgCaption) => {
     setId(_id);
@@ -27,28 +30,28 @@ export default function Product(props) {
     setImgCaption(_imgCaption);
   }
 
-  const initData = () => {
-      //if (this.props.location.product === undefined) {
-        const { match: { params } } = props;
-        setId(params.product_id);
-        console.log(params);
-        console.log(params.product_id);
-        fetchProduct(params.product_id);
-      //} else {
-        //const product = this.props.location.product;
-        //console.log(product);
-        //setState(product.ID, product.name, product.description, product.price, product.discountPrice, product.url, product.caption);
-      //}
+  const fetchProduct = () => {
+    getProduct(props.match.params.product_id, (status, data) => {
+      if (status === 200) {
+        const product = data[0];
+        setState(product.ID, product.name, product.description, product.price, product.discountPrice, product.url, product.caption);
+        console.log(product);
+      } else {
+        console.log(data)
+        alert(`ERROR ${status}: Check console`)
+      }
+    })
   }
 
-  const fetchProduct = (id) => {
-    const query = `${process.env.REACT_APP_API_HOST}/product/${id}`;
-    fetch(query).then(results => {
-      return results.json();
-    }).then(data => {
-      const product = data[0];
-        setState(product.ID, product.name, product.description, product.price, product.discountPrice, product.url, product.caption);
-      })
+  const fetchComments = () => {
+    getComments(props.match.params.product_id, (status, data) => {
+      if (status === 200) {
+        setComments(data);
+      } else {
+        console.log(data);
+        alert(`ERROR ${status}: Check console`)
+      }
+    })
   }
 
   const showPrice = () => {
@@ -74,7 +77,7 @@ export default function Product(props) {
             <input type = 'submit' value= 'Lägg i kundkorgen'/>
           </div>
           <p>Id: {id} </p>
-          <CommentList productId={id}/>
+          <CommentList comments={comments}/>
       </div>
     );
 }
