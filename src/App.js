@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import './css/App.css';
 // import Home from './pages/Home'
 import Products from './pages/Products'
@@ -15,10 +14,6 @@ export default function App() {
   const [rend, setRend] = useState(false);
   const rerender = () => {
     setRend(!rend);
-  }
-
-  const reloadData = () => {
-    fetchProducts()
   }
 
   return (
