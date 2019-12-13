@@ -34,8 +34,7 @@ export default function Product(props) {
     getProduct(props.match.params.product_id, (status, data) => {
       if (status === 200) {
         const product = data[0];
-        setState(product.ID, product.name, product.description, product.price, product.discountPrice, product.url, product.caption);
-        console.log(product);
+        setState(product.ID, product.Name, product.Description, product.Price, product.DiscountPrice, product.Url, product.Caption);
       } else {
         console.log(data)
         alert(`ERROR ${status}: Check console`)
