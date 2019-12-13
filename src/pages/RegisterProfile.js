@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import '../css/Login.css';
 import { registerUser } from '../functions/api'
 
 function RegisterProfile() {
 
+    useEffect(() => {
+        checkCookie();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, []);
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const checkCookie = () => {
+        if (Cookies.get("jwt")) {
+            window.location.assign("/");
+        }
+    }
 
     const updateName = e => {
         setName(e.target.value)

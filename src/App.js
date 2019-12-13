@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import './css/App.css';
@@ -12,19 +12,24 @@ import Account from './pages/Account'
 
 export default function App() {
 
+  const [rend, setRend] = useState(false);
+  const rerender = () => {
+    setRend(!rend);
+  }
+
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header rerend={rerender}/>
         <div className ="Background">
           <div className = "Content">
             <Switch>
               <Route exact path="/" component={Products} />
               <Route exact path="/products" component={Products} />
               <Route exact path="/products/:product_id" component={Product} />
-              <Route exact path ="/login" component={Cookies.get("jwt") ? Account : Login} />
-              <Route exact path ="/register" component={Cookies.get("jwt") ? Account : RegisterProfile} />
-              <Route exact path ="/account" component={Cookies.get("jwt") ? Account : Login} />
+              <Route exact path='/login' render={()=><Login rerend={rerender} />}/>
+              <Route exact path ="/register" render={()=><RegisterProfile rerend={rerender} />}/>
+              <Route exact path ="/account" render={()=><Account rerend={rerender} />}/>
             </Switch>
           </div>
         </div>           

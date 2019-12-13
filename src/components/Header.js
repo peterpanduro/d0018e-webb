@@ -11,7 +11,7 @@ export default function Header(props) {
 
     const logoutButtonPressed = e => {
         logout();
-        window.location.assign("/");
+        props.rerend()
     }
 
     return (
