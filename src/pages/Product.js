@@ -1,71 +1,80 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Product.css';
+import CommentList from '../components/CommentList';
 
-class Product extends Component{
+export default function Product(props) {
   
-constructor() {
-  super();
-    this.state = {
-        name: "",
-        description: "",
-        price: 0,
-        discountPrice: 0,
-        imgURL: "",
-        imgCaption: ""
-    };
+  useEffect(() => {
+    initData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const [id, setId] = useState(0);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(0);
+  const [discountPrice, setDiscountPrice] = useState(0);
+  const [imgURL, setImgURL] = useState("");
+  const [imgCaption, setImgCaption] = useState("");
+
+  const setState = (_id, _name, _description, _price, _discountPrice, _imgUrl, _imgCaption) => {
+    setId(_id);
+    setName(_name);
+    setDescription(_description);
+    setPrice(_price);
+    setDiscountPrice(_discountPrice);
+    setImgURL(_imgUrl);
+    setImgCaption(_imgCaption);
   }
 
-  componentDidMount() {
-      if (this.props.location.product === undefined) {
-        const { match: { params } } = this.props;
-        console.log("Product with id " + params.product_id + " is undefined")
-        this.fetchProduct(params.product_id);
-      } else {
-        const product = this.props.location.product;
-        console.log(product);
-        this.setState({name: product.name, description: product.description, price: product.price, discountPrice: product.discountPrice, imgURL: product.url, imgCaption: product.caption})
-      }
+  const initData = () => {
+      //if (this.props.location.product === undefined) {
+        const { match: { params } } = props;
+        setId(params.product_id);
+        console.log(params);
+        console.log(params.product_id);
+        fetchProduct(params.product_id);
+      //} else {
+        //const product = this.props.location.product;
+        //console.log(product);
+        //setState(product.ID, product.name, product.description, product.price, product.discountPrice, product.url, product.caption);
+      //}
   }
 
-  fetchProduct = (id) => {
+  const fetchProduct = (id) => {
     const query = `${process.env.REACT_APP_API_HOST}/product/${id}`;
     fetch(query).then(results => {
       return results.json();
     }).then(data => {
-      const p = data[0];
-      console.log(p);
-      this.setState({name: p.Name, description: p.Description, price: p.Price, discountPrice: p.DiscountPrice,imgURL: p.url, imgCaption: p.caption});
-    })
+      const product = data[0];
+        setState(product.ID, product.name, product.description, product.price, product.discountPrice, product.url, product.caption);
+      })
   }
 
-  render() {
-    console.log(this.state);
-
+  const showPrice = () => {
     let priceText;
-
-    if(this.state.price !== this.state.discountPrice)
+    if(price !== discountPrice)
     {
-    priceText = <div><h2>save {Math.trunc(100 -(this.state.discountPrice / this.state.price) * 100)}%!</h2><br/><h1><strike>{this.state.price}kr</strike><br/>{this.state.discountPrice}kr</h1></div>;
+    priceText = <div><h2>save {Math.trunc(100 -(discountPrice / price) * 100)}%!</h2><br/><h1><strike>{price}kr</strike><br/>{discountPrice}kr</h1></div>;
     }
     else
     {
-      priceText = <div><h1>{this.state.price}kr</h1></div>
+      priceText = <div><h1>{price}kr</h1></div>
     }
+    return priceText;
+  }
 
     return (
-
-
       <div className="product">
-          <img src={this.state.imgURL} alt={this.state.imgCaption}></img>
+          <img src={imgURL} alt={imgCaption}></img>
           <div className="text-container">
-            {priceText}
-            <h2>{this.state.name}</h2>
-            <p>{ this.state.description}</p>
+            {showPrice()}
+            <h2>{name}</h2>
+            <p>{description}</p>
             <input type = 'submit' value= 'Lägg i kundkorgen'/>
           </div>
+          <p>Id: {id} </p>
+          <CommentList productId={id}/>
       </div>
     );
-  }
 }
-
-export default Product;

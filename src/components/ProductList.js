@@ -4,16 +4,6 @@ import '../css/ProductList.css';
 
 
 export default function ProductList(props) {
-    /*let priceText;
-    if(this.state.price !== this.state.discountPrice)
-    {
-    priceText = <div><h2>save {Math.trunc(100 -(product.discountPrice / product.price) * 100)}%!</h2><br/><h1><strike>{this.state.price}kr</strike><br/>{this.state.discountPrice}kr</h1></div>;
-    }
-    else
-    {
-      priceText = <div><h1>{product.price}kr</h1></div>
-    }
-    */
     return (
         <div>
             {props.products.map(product => (
@@ -31,7 +21,6 @@ export default function ProductList(props) {
                     <ul>
                         <li>
                         {((price, discountprice) => {
-                            let priceText;
                             if(price !== discountprice)
                             {
                                 return <div>save {Math.trunc(100 -(discountprice / price) * 100)}%!<br/><strike>{price}kr</strike> {discountprice}kr</div>;

@@ -45,6 +45,21 @@ export const getCategories = (callback) => {
     })
 }
 
+export const getComments = (postID, callback) => {
+    const query = `${api_url}/comments/${postID}`;
+    console.log(query);
+    fetch(query, {
+        method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+    }).then(response => {
+        response.json().then(json => {
+            callback(response.status, json);
+        })
+    })
+}
+
 export const loginUser = (email, password, callback) => {
     fetch(`${api_url}/user/login`, {
             method: 'POST',
