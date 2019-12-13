@@ -15,7 +15,6 @@ useEffect(() => {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = () => {
-    console.log("products are being fetched")
     const query = queryString.parse(props.location.search);
     const key = Object.keys(query)[0];
     const searchQuery = key ? `?${key}=${query[key]}` : "";

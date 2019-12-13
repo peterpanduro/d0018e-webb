@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SearchBox from './SearchBox'
 import Cookies from 'js-cookie'
 
-export default function Header() {
+export default function Header(props) {
 
     const logout = () => {
         Cookies.remove("jwt");

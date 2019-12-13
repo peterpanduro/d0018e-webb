@@ -7,14 +7,12 @@ export default function CategoryList(props) {
 
   useEffect(() => {
     fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [categories, setCategories] = useState([]);
 
   const fetchCategories = () => {
-
-    console.log(props)
-
     getCategories((status, data) => {
       if (status === 200) {
         setCategories(data);

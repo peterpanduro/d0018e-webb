@@ -1,84 +1,58 @@
-import React, {Component} from 'react';
-import '../css/Login.css'
+import React, { useState } from 'react';
 import Cookies from 'js-cookie';
+import '../css/Login.css'
+import { loginUser } from '../functions/api'
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: ''
-        }
-        this.submitHandler = this.submitHandler.bind(this);
-        this.handler = this.handler.bind(this);
+export default function Login() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const updateEmail = e => {
+        setEmail(e.target.value);
     }
 
-    submitHandler = e => {
-        this.handler(e); 
-     }
-
-    updateEmail = e => {
-        this.setState({email: e.target.value});
+    const updatePassword = e => {
+        setPassword(e.target.value);
     }
 
-    updatePassword = e => {
-        this.setState({password: e.target.value});  
-    }
-
-    async handler(e) {
+    const login = e => {
         e.preventDefault();
-        fetch('http://api.d0018e.pndro.se/user/login', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'email': this.state.email,
-                'password': this.state.password
+        loginUser(email, password, (status, data) => {
+            if (status === 200) {
+                Cookies.set('email', data.email,{expires: 30});
+                Cookies.set('password', data.password,{expires: 30});
+                Cookies.set('jwt', data.jwt, {expires: 30});
+            } else {
+                console.log (data);
             }
-        }).then(response => {
-            response.json().then(json => {
-                if (response.status === 200) {
-                    Cookies.set('email', this.state.email,{expires: 30});
-                    Cookies.set('password', this.state.password,{expires: 30});
-                    Cookies.set('jwt', json.jwt, {expires: 30});
-                    //window.location.assign("/");
-                    this.forceUpdate();
-                } else {
-                    console.log ("ajdo");
-                    // TODO: Show someting to the user
-                }
-            })
         })
     }
 
-    render() {
-        return (  
-            <div className="Login">
-                <div className = "otherBox">
-                    <h1>Logga in på datamerchstore AB</h1>
-                    <h3>Med ett konto på datamerchstore AB kan du göra allt detta:</h3><br/>
-                    <ul>
-                        <li>Spara din address</li> <br/> 
-                        <li>Snabbare checkout</li><br/>
-                        <li>Spara din kundkorg</li><br/>
-                        <li>Få sålda uppgifter</li>
-                    </ul>
-                </div>
-                <div className = "loginBox">
-                    <h2>Logga in</h2>
-                    <div className = "input-container">
-                        <form onSubmit={this.handler}>
-                            <h3>E-post address</h3>
-                            <input type="text" onChange={this.updateEmail}></input>
-                            <h3>Lösenord</h3>
-                            <input type="password" onChange={this.updatePassword}></input>
-                            <input type="submit" value="Logga in"></input>
-                        </form> 
-                    </div>
-                </div>  
+    return (  
+        <div className="Login">
+            <div className = "otherBox">
+                <h1>Logga in på datamerchstore AB</h1>
+                <h3>Med ett konto på datamerchstore AB kan du göra allt detta:</h3><br/>
+                <ul>
+                    <li>Spara din address</li> <br/> 
+                    <li>Snabbare checkout</li><br/>
+                    <li>Spara din kundkorg</li><br/>
+                    <li>Få sålda uppgifter</li>
+                </ul>
             </div>
-        );
-    }
+            <div className = "loginBox">
+                <h2>Logga in</h2>
+                <div className = "input-container">
+                    <form onSubmit={login}>
+                        <h3>E-post address</h3>
+                        <input type="text" value={email} onChange={updateEmail}></input>
+                        <h3>Lösenord</h3>
+                        <input type="password" value={password} onChange={updatePassword}></input>
+                        <input type="submit" value="Logga in"></input>
+                    </form> 
+                </div>
+            </div>  
+        </div>
+    );
 }
-export default Login;
-

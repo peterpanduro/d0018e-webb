@@ -44,3 +44,19 @@ export const getCategories = (callback) => {
         })
     })
 }
+
+export const loginUser = (email, password, callback) => {
+    fetch(`${api_url}/user/login`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'email': email,
+                'password': password
+            }
+        }).then(response => {
+            response.json().then(json => {
+                callback(response.status, json);
+            })
+        })
+}
