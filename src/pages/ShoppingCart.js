@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ShoppingCart() {
+export default function ShoppingCart() {
   return (
     <div className="ShoppingCart">
       <h1>Kundkorg</h1>
@@ -8,5 +8,3 @@ function ShoppingCart() {
     </div>
   );
 }
-
-export default ShoppingCart;

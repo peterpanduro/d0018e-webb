@@ -8,7 +8,6 @@ export default function Home() {
       <br></br>
       <Categories/>
       <ProductList />
-      
     </div>
   );
 }

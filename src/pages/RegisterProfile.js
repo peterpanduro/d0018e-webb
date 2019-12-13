@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import '../css/Login.css';
 import { registerUser } from '../functions/api'
 
-function RegisterProfile() {
+export default function RegisterProfile() {
 
     useEffect(() => {
         checkCookie();
@@ -74,5 +74,3 @@ function RegisterProfile() {
         </div>
   );    
 }
-
-export default RegisterProfile;

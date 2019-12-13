@@ -17,6 +17,10 @@ export default function App() {
     setRend(!rend);
   }
 
+  const reloadData = () => {
+    fetchProducts()
+  }
+
   return (
     <Router>
       <div className="App">

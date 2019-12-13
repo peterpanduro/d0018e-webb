@@ -28,7 +28,7 @@ export default function CategoryList(props) {
       <ul>
         {categories.map(category => (
           <li key={category.ID}>
-          <Link to={"/products?category=" + category.ID} onClick={() => props.reloadProducts()}>{category.Name}</Link>
+          <Link to={"/products?category=" + category.ID} onClick={() => props.reloadProducts(`?category=${category.ID}`)}>{category.Name}</Link>
         </li>
         ))}
       </ul>
