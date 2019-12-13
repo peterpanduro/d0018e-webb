@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import '../css/ProductList.css';
-
+import Img from 'react-image'
+import Spinner from './Spinner'
 
 export default function ProductList(props) {
     return (
@@ -30,7 +31,7 @@ export default function ProductList(props) {
                             }
                         })(product.Price, product.DiscountPrice)}
                         </li>
-                        <img src={product.url} alt={product.caption}></img><br/>
+                        <Img src={product.url} loader={<Spinner />} unloader={<img src={require('../no_img.png')} />} />
                         <li>{product.Name}</li>
                         <li>Lagerstatus: {product.Stock}</li>
                     </ul>

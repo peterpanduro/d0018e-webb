@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Img from 'react-image'
 import '../css/Product.css';
 import CommentList from '../components/CommentList';
 import { getProduct, getComments } from '../functions/api'
+import Spinner from '../components/Spinner'
 
 export default function Product(props) {
   
@@ -34,7 +36,7 @@ export default function Product(props) {
     getProduct(props.match.params.product_id, (status, data) => {
       if (status === 200) {
         const product = data[0];
-        setState(product.ID, product.Name, product.Description, product.Price, product.DiscountPrice, product.Url, product.Caption);
+        setState(product.ID, product.Name, product.Description, product.Price, product.DiscountPrice, product.url, product.Caption);
       } else {
         console.log(data)
         alert(`ERROR ${status}: Check console`)
@@ -68,7 +70,7 @@ export default function Product(props) {
 
     return (
       <div className="product">
-          <img src={imgURL} alt={imgCaption}></img>
+          <Img src={imgURL} loader={<Spinner />} unloader={<img src={require('../no_img.png')} />} />
           <div className="text-container">
             {showPrice()}
             <h2>{name}</h2>
