@@ -31,7 +31,7 @@ export default function ProductList(props) {
                             }
                         })(product.Price, product.DiscountPrice)}
                         </li>
-                        <Img src={product.url} loader={<Spinner />} unloader={<img src={require('../no_img.png')} />} />
+                        <Img src={product.url} alt={product.caption} loader={<Spinner />} unloader={<img alt="" src={require('../no_img.png')} />} />
                         <li>{product.Name}</li>
                         <li>Lagerstatus: {product.Stock}</li>
                     </ul>

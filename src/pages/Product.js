@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Img from 'react-image'
 import '../css/Product.css';
 import CommentList from '../components/CommentList';
-import { getProduct, getComments } from '../functions/api'
+import { getProduct } from '../functions/api'
 import Spinner from '../components/Spinner'
 
 export default function Product(props) {
   
   useEffect(() => {
-    fetchProduct();
-    fetchComments();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    fetchProduct(props.match.params.product_id);
+  }, [props.match.params.product_id]);
 
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
@@ -20,7 +18,6 @@ export default function Product(props) {
   const [discountPrice, setDiscountPrice] = useState(0);
   const [imgURL, setImgURL] = useState("");
   const [imgCaption, setImgCaption] = useState("");
-  const [comments, setComments] = useState([]);
 
   const setState = (_id, _name, _description, _price, _discountPrice, _imgUrl, _imgCaption) => {
     setId(_id);
@@ -32,24 +29,13 @@ export default function Product(props) {
     setImgCaption(_imgCaption);
   }
 
-  const fetchProduct = () => {
-    getProduct(props.match.params.product_id, (status, data) => {
+  const fetchProduct = (id) => {
+    getProduct(id, (status, data) => {
       if (status === 200) {
         const product = data[0];
         setState(product.ID, product.Name, product.Description, product.Price, product.DiscountPrice, product.url, product.Caption);
       } else {
         console.log(data)
-        alert(`ERROR ${status}: Check console`)
-      }
-    })
-  }
-
-  const fetchComments = () => {
-    getComments(props.match.params.product_id, (status, data) => {
-      if (status === 200) {
-        setComments(data);
-      } else {
-        console.log(data);
         alert(`ERROR ${status}: Check console`)
       }
     })
@@ -70,7 +56,7 @@ export default function Product(props) {
 
     return (
       <div className="product">
-          <Img src={imgURL} loader={<Spinner />} unloader={<img src={require('../no_img.png')} />} />
+          <Img src={imgURL} alt={imgCaption} loader={<Spinner />} unloader={<img alt="" src={require('../no_img.png')} />} />
           <div className="text-container">
             {showPrice()}
             <h2>{name}</h2>
@@ -78,7 +64,7 @@ export default function Product(props) {
             <input type = 'submit' value= 'Lägg i kundkorgen'/>
           </div>
           <p>Id: {id} </p>
-          <CommentList comments={comments}/>
+          <CommentList product_id={id}/>
       </div>
     );
 }
