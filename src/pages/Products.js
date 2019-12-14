@@ -8,14 +8,13 @@ import { getProducts } from '../functions/api'
 export default function Products(props) {
 
   useEffect(() => {
-    fetchProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    fetchProducts(props.location.search);
+  }, [props.location.search]);
 
   const [products, setProducts] = useState([]);
 
   const fetchProducts = (q = undefined) => {
-    const query = queryString.parse(props.location.search);
+    const query = queryString.parse(q);
     const key = Object.keys(query)[0];
     const searchQuery = q ? q : (key ? `?${key}=${query[key]}` : "");
     getProducts(searchQuery, (status, data) => {

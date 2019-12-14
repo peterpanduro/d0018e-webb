@@ -63,7 +63,6 @@ export default function Product(props) {
             <p>{description}</p>
             <input type = 'submit' value= 'Lägg i kundkorgen'/>
           </div>
-          <p>Id: {id} </p>
           <CommentList product_id={id}/>
       </div>
     );

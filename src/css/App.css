@@ -16,6 +16,7 @@
   height: 100vh;
   align-items: center;
   margin: 0 auto;
+  padding: 58px;
 }
 
 .App-logo {
@@ -31,6 +32,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white; 
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
  ul {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBox from './SearchBox'
 import Cookies from 'js-cookie'
+//import '../css/Header.css'
 
 export default function Header(props) {
 

@@ -60,7 +60,6 @@ export const getCategories = (callback) => {
 
 export const getComments = (postID, callback) => {
     const query = `${api_url}/comments/${postID}`;
-    console.log(query);
     fetch(query, {
         method: 'GET',
             headers: {
