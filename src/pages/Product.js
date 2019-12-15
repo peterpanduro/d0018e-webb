@@ -64,17 +64,23 @@ export default function Product(props) {
 
     return (
       <div className="product">
-          <Img src={imgURL} alt={imgCaption} loader={<Spinner />} unloader={<img alt="" src={require('../no_img.png')} />} />
-          <div className="text-container">
-            {showPrice()}
-            <h2>{name}</h2>
-            <p>{description}</p>
-            <div className="addToCart">
-              <input className='addToCartButton' type='button' value='Lägg i kundkorgen'/>
-              <div className="numberOfItems">
-                <input type='button' value='-' onClick={decreaseNumberOfItems}/>
-                <input type='text' value={numberOfItems} readOnly />
-                <input type='button' value='+' onClick={increaseNumberOfItems} />
+          <div className="productInfo">
+            <div className="images">
+              <div className="mainImage">
+                <Img src={imgURL} alt={imgCaption} loader={<Spinner />} unloader={<img alt="" src={require('../no_img.png')} />} />
+              </div>
+            </div>
+            <div className="productInfoText">
+              {showPrice()}
+              <h2>{name}</h2>
+              <p>{description}</p>
+              <div className="addToCart">
+                <input className='addToCartButton' type='button' value='Lägg i kundkorgen'/>
+                <div className="numberOfItems">
+                  <input type='button' value='-' onClick={decreaseNumberOfItems}/>
+                  <input type='text' value={numberOfItems} readOnly />
+                  <input type='button' value='+' onClick={increaseNumberOfItems} />
+                </div>
               </div>
             </div>
           </div>
