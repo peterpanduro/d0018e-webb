@@ -19,24 +19,37 @@ export default function Product(props) {
   const [imgURL, setImgURL] = useState("");
   const [imgCaption, setImgCaption] = useState("");
 
-  const setState = (_id, _name, _description, _price, _discountPrice, _imgUrl, _imgCaption) => {
-    setId(_id);
-    setName(_name);
-    setDescription(_description);
-    setPrice(_price);
-    setDiscountPrice(_discountPrice);
-    setImgURL(_imgUrl);
-    setImgCaption(_imgCaption);
+  const [numberOfItems, setNumberOfItems] = useState(1);
+
+  const setNumberOfItemsText = e => {
+    e.preventDefault();
+    setNumberOfItems(e.target.value);
+  }
+
+  const increaseNumberOfItems = e => {
+    e.preventDefault();
+    setNumberOfItems(numberOfItems+1);
+  }
+
+  const decreaseNumberOfItems = e => {
+    e.preventDefault();
+    setNumberOfItems(numberOfItems > 1 ? numberOfItems-1 : 1);
   }
 
   const fetchProduct = (id) => {
     getProduct(id, (status, data) => {
       if (status === 200) {
-        const product = data[0];
-        setState(product.ID, product.Name, product.Description, product.Price, product.DiscountPrice, product.url, product.Caption);
+        const {ID, Name, Description, Price, DiscountPrice, url, Caption} = data[0];
+        setId(ID);
+        setName(Name);
+        setDescription(Description);
+        setPrice(Price);
+        setDiscountPrice(DiscountPrice);
+        setImgURL(url);
+        setImgCaption(Caption);
       } else {
         console.log(data)
-        alert(`ERROR ${status}: Check console`)
+        alert(data)
       }
     })
   }
@@ -61,7 +74,14 @@ export default function Product(props) {
             {showPrice()}
             <h2>{name}</h2>
             <p>{description}</p>
-            <input type = 'submit' value= 'Lägg i kundkorgen'/>
+            <div className="addToCart">
+              <input className='addToCartButton' type='button' value='Lägg i kundkorgen'/>
+              <div className="numberOfItems">
+                <input type='button' value='-' onClick={decreaseNumberOfItems}/>
+                <input type='text' value={numberOfItems} readOnly />
+                <input type='button' value='+' onClick={increaseNumberOfItems} />
+              </div>
+            </div>
           </div>
           <CommentList product_id={id}/>
       </div>

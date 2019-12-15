@@ -12,7 +12,23 @@
     color: #f54242;
 }
 
+.addToCart {
+    display: flex;
+    justify-content: center;
+}
 
+.numberOfItems input {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 0;
+    width: 40px;
+    -webkit-appearance: none;
+}
+
+.addToCartButton {
+    margin-right: 20px;
+}
 
 .text-container input[type = submit] {
     background-color:yellow; 
