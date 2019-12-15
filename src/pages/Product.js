@@ -21,11 +21,6 @@ export default function Product(props) {
 
   const [numberOfItems, setNumberOfItems] = useState(1);
 
-  const setNumberOfItemsText = e => {
-    e.preventDefault();
-    setNumberOfItems(e.target.value);
-  }
-
   const increaseNumberOfItems = e => {
     e.preventDefault();
     setNumberOfItems(numberOfItems+1);

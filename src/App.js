@@ -26,7 +26,7 @@ export default function App() {
               <Route exact path="/" component={Products} />
               <Route exact path="/products" component={Products} />
               <Route exact path="/products/:product_id" component={Product} />
-              <Route exact path='/login' render={()=><Login rerend={rerender} />}/>
+              <Route exact path='/login' render={ () => <Login rerend={rerender} />}/>
               <Route exact path ="/register" render={()=><RegisterProfile rerend={rerender} />}/>
               <Route exact path ="/account" render={()=><Account rerend={rerender} />}/>
             </Switch>

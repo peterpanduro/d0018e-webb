@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import '../css/Products.css';
 import Categories from '../components/CategoryList';
@@ -12,13 +11,9 @@ export default function Products(props) {
     fetchProducts(props.location.search);
   }, [props.location.search]);
 
-  const location = useLocation();
   const [products, setProducts] = useState([]);
 
   const fetchProducts = (q = undefined) => {
-
-    console.log({location})
-
     const query = queryString.parse(q);
     const key = Object.keys(query)[0];
     const searchQuery = q ? q : (key ? `?${key}=${query[key]}` : "");
@@ -27,6 +22,7 @@ export default function Products(props) {
         setProducts(data);
       } else {
         console.log(data);
+        alert(`Status: ${status}\nDescription: ${data.description}`);
       }
     })
   }

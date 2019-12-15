@@ -9,15 +9,15 @@ export default function Login(props) {
     const [_password, setPassword] = useState("");
 
     const mount = () => {
-        console.log('mounted')
+        // Only runs when mounted
         checkCookie();
       
         const unmount = () => {
-          console.log('unmounted')
+          // Only runs when unmounted
         }
         return unmount
-      }
-      useEffect(mount, [])
+    }
+    useEffect(mount, [])
 
     const checkCookie = () => {
         const email = Cookies.get("email");
