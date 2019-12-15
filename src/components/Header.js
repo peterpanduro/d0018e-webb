@@ -8,6 +8,8 @@ export default function Header(props) {
 
     const logout = () => {
         Cookies.remove("jwt");
+        Cookies.remove("email");
+        Cookies.remove("password");
     }
 
     const logoutButtonPressed = e => {

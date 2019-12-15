@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import '../css/Login.css';
 import { registerUser } from '../functions/api'
@@ -9,6 +10,8 @@ export default function RegisterProfile() {
         checkCookie();
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
+
+    const history = useHistory();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -34,13 +37,15 @@ export default function RegisterProfile() {
 
     const registerProfile = e => {
         e.preventDefault();
-        registerUser(name, email, password, (status, json) => {
-            if (status === 200) {
-
+        registerUser(name, email, password, (status, data) => {
+            if (status === 201) {
+                Cookies.set('email', email);
+                Cookies.set('password', password);
+                history.push("/login");
             } else {
-                // TODO Show error to user
+                console.log(data);
+                alert(`Status: ${status}\nDescription: ${data.description}`);
             }
-            console.log(json);
         })
     }
 

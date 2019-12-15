@@ -5,18 +5,28 @@ import { loginUser } from '../functions/api'
 
 export default function Login(props) {
 
-    useEffect(() => {
-        checkCookie();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
-      
+    const [_email, setEmail] = useState("");
+    const [_password, setPassword] = useState("");
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const mount = () => {
+        console.log('mounted')
+        checkCookie();
+      
+        const unmount = () => {
+          console.log('unmounted')
+        }
+        return unmount
+      }
+      useEffect(mount, [])
 
     const checkCookie = () => {
-        if (Cookies.get("jwt")) {
+        const email = Cookies.get("email");
+        const password = Cookies.get("password");
+        const jwt = Cookies.get("jwt");
+        if (jwt) {
             window.location.assign("/");
+        } else if (email && password){
+            login(email, password);
         }
     }
 
@@ -28,17 +38,25 @@ export default function Login(props) {
         setPassword(e.target.value);
     }
 
-    const login = e => {
-        e.preventDefault();
+    const submitHandler = e => {
+        if (e) {
+            e.preventDefault();
+        }
+        login(_email, _password);
+    }
+
+    const login = (email, password) => {
+        console.log({email, password});
         loginUser(email, password, (status, data) => {
             if (status === 200) {
-                Cookies.set('email', data.email,{expires: 30});
-                Cookies.set('password', data.password,{expires: 30});
+                Cookies.set('email', email);
+                Cookies.set('password', password);
                 Cookies.set('jwt', data.jwt, {expires: 30});
                 props.rerend();
                 window.location.assign('/');
             } else {
                 console.log (data);
+                alert(`Status: ${status}\nDescription:${data.description}`)
             }
         })
     }
@@ -58,11 +76,11 @@ export default function Login(props) {
             <div className = "loginBox">
                 <h2>Logga in</h2>
                 <div className = "input-container">
-                    <form onSubmit={login}>
+                    <form onSubmit={submitHandler}>
                         <h3>E-post address</h3>
-                        <input type="text" value={email} onChange={updateEmail}></input>
+                        <input type="text" value={_email} onChange={updateEmail}></input>
                         <h3>Lösenord</h3>
-                        <input type="password" value={password} onChange={updatePassword}></input>
+                        <input type="password" value={_password} onChange={updatePassword}></input>
                         <input type="submit" value="Logga in"></input>
                     </form> 
                 </div>
