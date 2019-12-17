@@ -1,0 +1,7 @@
+.Comments h2, p {
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    padding: 5px;
+}
+
