@@ -53,11 +53,11 @@ export default function Product(props) {
     let priceText;
     if(price !== discountPrice)
     {
-    priceText = <div><h2>save {Math.trunc(100 -(discountPrice / price) * 100)}%!</h2><br/><h1><strike>{price}kr</strike><br/>{discountPrice}kr</h1></div>;
+    priceText = <div><h2>save {Math.trunc(100 -(discountPrice / price) * 100)}%!</h2><h2><strike>{price}kr</strike></h2><h1>{discountPrice}kr</h1></div>;
     }
     else
     {
-      priceText = <div><h1>{price}kr</h1></div>
+      priceText = <div><h2>{price}kr</h2></div>
     }
     return priceText;
   }

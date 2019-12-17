@@ -28,7 +28,6 @@
 
 .productItem ul > li:nth-child(1) {
     justify-self: left;
-    color:#f54242;
     font-size: 24px;
     font-weight: bold;
 }
