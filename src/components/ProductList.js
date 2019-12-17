@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import '../css/ProductList.css';
-import Img from 'react-image'
-import Spinner from './Spinner'
+import Img from 'react-image';
+import Spinner from './Spinner';
 
 export default function ProductList(props) {
     return (
