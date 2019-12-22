@@ -4,9 +4,12 @@ import '../css/Product.css';
 import CommentList from '../components/CommentList';
 import { getProduct } from '../functions/api'
 import Spinner from '../components/Spinner'
+import { useCart } from '../AppContext'
 
 export default function Product(props) {
   
+  const [cartState, cartDispatch] = useCart();
+
   useEffect(() => {
     fetchProduct(props.match.params.product_id);
   }, [props.match.params.product_id]);
@@ -49,6 +52,12 @@ export default function Product(props) {
     })
   }
 
+  const addItemInCart = e => {
+    e.preventDefault();
+    cartDispatch({type: 'add', content: {name, id, numberOfItems}});
+    console.log(cartState);
+  }
+
   const showPrice = () => {
     let priceText;
     if(price !== discountPrice)
@@ -75,7 +84,7 @@ export default function Product(props) {
               <h2>{name}</h2>
               <p>{description}</p>
               <div className="addToCart">
-                <input className='addToCartButton' type='button' value='Lägg i kundkorgen'/>
+                <input className='addToCartButton' type='button' value='Lägg i kundkorgen' onClick={addItemInCart}/>
                 <div className="numberOfItems">
                   <input type='button' value='-' onClick={decreaseNumberOfItems}/>
                   <input type='text' value={numberOfItems} readOnly />

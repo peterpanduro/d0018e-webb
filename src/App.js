@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Product from './pages/Product'
 import Login from './pages/Login'
 import Account from './pages/Account'
+import { CartProvider } from './AppContext'
 
 export default function App() {
 
@@ -18,6 +19,7 @@ export default function App() {
 
   return (
     <Router>
+      <CartProvider>
       <div className="App">
         <Header rerend={rerender}/>
         <div className ="Background">
@@ -33,6 +35,7 @@ export default function App() {
           </div>
         </div>           
       </div>
+      </CartProvider>
     </Router>
   );
 }
