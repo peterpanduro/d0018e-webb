@@ -1,7 +1,18 @@
-.Comments h2, p {
+.CommentsContainer h2, p {
     display: flex;
     justify-content: center;
     max-width: 500px;
     padding: 5px;
 }
 
+.Comments {
+    list-style: none;
+    width: 100%;
+}
+
+.Comment {
+    width: 100%;
+    float: left;
+    background: lightgray;
+    margin-bottom: 10px;
+}

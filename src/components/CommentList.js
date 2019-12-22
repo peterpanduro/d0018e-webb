@@ -23,13 +23,12 @@ export default function CommentList(props) {
   }
 
   return (
-    <div className="Comments">
-      
-      <ul>
+    <div className="CommentsContainer">
+      <h2>Kommentarer</h2>
+      <ul className="Comments">
         {comments.map(comment => (
-          <li key={comment.ID}>
-            <p>Betyg: <BeautyStars value = {comment.Rating} activeColor= "yellow" size = "30px"/></p>
-            <h2>Kommentarer</h2>  
+          <li key={comment.ID} className="Comment">
+            <p>Betyg: </p><BeautyStars value = {comment.Rating} activeColor= "yellow" size = "30px"/>
             <p>{comment.Name}</p>
             <p>{comment.Opinion}</p>
           </li>
