@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Cookies from 'js-cookie';
 import { getUser } from '../functions/api'
-import { useCart } from '../AppContext'
+import { useCartState } from '../AppContext'
 
 export default function Account() {
 
     const [user, setUser] = useState({});
-    const [cartState, cartDispatch] = useCart();
+    const cartState = useCartState();
 
     useEffect(() => {
         checkCookie();
@@ -34,7 +34,7 @@ export default function Account() {
 
     return (
         <div>
-            <p>Number of items in cart: {cartState.length}</p>
+            <p>Number of items in cart: {cartState.cart.length}</p>
             <p>Account page</p>
             <p>This page will only show when user is logged in</p>
             <p>Namn: {user.Name}</p>

@@ -4,11 +4,11 @@ import '../css/Product.css';
 import CommentList from '../components/CommentList';
 import { getProduct } from '../functions/api'
 import Spinner from '../components/Spinner'
-import { useCart } from '../AppContext'
+import { useCartDispatch } from '../AppContext'
 
 export default function Product(props) {
   
-  const [cartState, cartDispatch] = useCart();
+  const cartDispatch = useCartDispatch();
 
   useEffect(() => {
     fetchProduct(props.match.params.product_id);
@@ -55,7 +55,6 @@ export default function Product(props) {
   const addItemInCart = e => {
     e.preventDefault();
     cartDispatch({type: 'add', content: {name, id, numberOfItems}});
-    console.log(cartState);
   }
 
   const showPrice = () => {

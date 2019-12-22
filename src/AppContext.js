@@ -6,7 +6,9 @@ const CartDispatchContext = React.createContext();
 const cartReducer = (state, action) => {
     switch (action.type) {
         case 'add':
-            return {cart: state.cart.push(action.content)};
+            var cart = state.cart;
+            cart.push(action.content);
+            return {cart};
         default:
             throw new Error("Unhandled action type");
     }
