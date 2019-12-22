@@ -87,3 +87,16 @@ export const loginUser = (email, password, callback) => {
             })
         })
 }
+
+export const getUser = async (jwt, callback) => {
+    const response = await fetch(`${api_url}/user`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt': jwt
+        }
+    });
+    const json = await response.json();
+    callback(response.status, json);
+}
