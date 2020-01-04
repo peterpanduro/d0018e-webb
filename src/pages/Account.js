@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
 import { getUser } from '../functions/api'
+import '../css/Account.css'
+
 
 export default function Account() {
 
@@ -30,11 +32,18 @@ export default function Account() {
 
 
     return (
-        <div>
-            <p>Account page</p>
-            <p>This page will only show when user is logged in</p>
-            <p>Namn: {user.Name}</p>
-            <p>Email: {user.Email}</p>
+        <div className = "Account">
+            <h2>Mina sidor</h2>
+            <div className = "container">
+                <div className = "border">
+                    <p>Kundinformation</p>
+                </div>
+                <ul>
+                    <li><strong>Namn och Email-adress:</strong></li><br/>
+                    <li>{user.Name}</li><br/>
+                    <li>{user.Email}</li>
+                </ul>
+            </div>
         </div>
     )
 }
