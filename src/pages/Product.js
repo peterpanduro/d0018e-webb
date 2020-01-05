@@ -6,6 +6,7 @@ import { getProduct } from '../functions/api'
 import Spinner from '../components/Spinner'
 import { useCartDispatch } from '../AppContext'
 
+
 export default function Product(props) {
   
   const cartDispatch = useCartDispatch();
@@ -96,3 +97,4 @@ export default function Product(props) {
       </div>
     );
 }
+

@@ -29,6 +29,7 @@ export default function ProductList(props) {
                             {
                               return <div>{price}kr</div>
                             }
+
                         })(product.Price, product.DiscountPrice)}
                         </li>
                         <Img src={product.url} alt={product.caption} loader={<Spinner />} unloader={<img alt="" src={require('../no_img.png')} />} />

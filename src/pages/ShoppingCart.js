@@ -1,8 +1,11 @@
 import React from 'react';
 import { useCart } from '../AppContext';
+import '../css/ShoppingCart.css';
+
+
 
 export default function ShoppingCart() {
-
+  
   const [cartState, cartDispatch] = useCart();
 
   const buyButtonPressed = e => {
@@ -11,6 +14,7 @@ export default function ShoppingCart() {
       cartDispatch({type: 'clear'});
       // TODO: Create Order
       window.location.assign("/account/orders/:orderId")
+ 
     }
   }
 
@@ -24,14 +28,18 @@ export default function ShoppingCart() {
 
   return (
     <div className="ShoppingCart">
-      <h1>Kundkorg</h1>
-      {cartState.cart.map(item => (
-        <div key={item.id}>
-          <p>{item.numberOfItems} st. {item.name}</p>
-          <button onClick={e => removeProduct(e, item)}>Remove item</button>
-        </div>
-      ))}
-      <button onClick={buyButtonPressed}>Köp</button>
+      <h1>Slutför din beställning</h1>
+      <div className="p">
+      <h3>Din kundkorg</h3>
+        {cartState.cart.map(item => (
+          <div key={item.id}>
+            <p>{item.numberOfItems} st. {item.name} </p>
+            <p>DataMerchStore AB &trade;</p>
+            <button onClick={e => removeProduct(e, item)}>X</button>
+          </div>      
+        ))}
+      </div>
+      <button id ="buy" onClick={buyButtonPressed}>Fortsätt</button>
     </div>
   );
 }
