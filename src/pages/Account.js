@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { getUser } from '../functions/api'
 import '../css/Account.css'
+
 
 
 export default function Account() {
@@ -43,6 +45,7 @@ export default function Account() {
                     <li>{user.Name}</li><br/>
                     <li>{user.Email}</li>
                 </ul>
+                <Link to="./editprofile" className="btn btn-primary">helå</Link>
             </div>
         </div>
     )
