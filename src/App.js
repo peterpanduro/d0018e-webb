@@ -9,6 +9,7 @@ import Product from './pages/Product'
 import Login from './pages/Login'
 import Account from './pages/Account'
 import ShoppingCart from './pages/ShoppingCart'
+import Order from './pages/Order'
 import NotFound from './pages/404'
 import { CartProvider } from './AppContext'
 
@@ -34,6 +35,7 @@ export default function App() {
               <Route exact path ="/register" render={()=><RegisterProfile rerend={rerender} />}/>
               <Route exact path ="/account" render={()=><Account rerend={rerender} />}/>
               <Route exact path="/cart" component={ShoppingCart} />
+              <Route exact path="/account/order/:order_id" component={Order} />
               <Route component={NotFound} />
             </Switch>
           </div>

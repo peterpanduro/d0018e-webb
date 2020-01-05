@@ -7,7 +7,11 @@ export default function ShoppingCart() {
 
   const buyButtonPressed = e => {
     e.preventDefault();
-    alert("You pressed the buy button")
+    if (window.confirm("sure")) {
+      cartDispatch({type: 'clear'});
+      // TODO: Create Order
+      window.location.assign("/account/orders/:orderId")
+    }
   }
 
   const removeProduct = (e, item) => {

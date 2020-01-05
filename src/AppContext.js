@@ -4,9 +4,10 @@ const CartStateContext = React.createContext([]);
 const CartDispatchContext = React.createContext();
 
 const cartReducer = (state, action) => {
+    var cart;
     switch (action.type) {
         case 'add':
-            var cart = state.cart;
+            cart = state.cart;
             var found = false;
             cart = cart.map(item => {
                 if (item.id === action.content.id) {
@@ -21,7 +22,7 @@ const cartReducer = (state, action) => {
             }
             return {cart};
         case 'set':
-            var cart = state.cart;
+            cart = state.cart;
             if (action.content.numberOfItems === 0) {
                 cart = cart.filter(item => item.id !== action.content.id);
             } else {
@@ -33,6 +34,9 @@ const cartReducer = (state, action) => {
                 });
             }
             return {cart};
+        case 'clear':
+            cart = [];
+            return {cart}
         default:
             throw new Error("Unhandled action type");
     }
