@@ -5,6 +5,11 @@ export default function ShoppingCart() {
 
   const [cartState, cartDispatch] = useCart();
 
+  const buyButtonPressed = e => {
+    e.preventDefault();
+    alert("You pressed the buy button")
+  }
+
   return (
     <div className="ShoppingCart">
        <h1>Kundkorg</h1>
@@ -13,6 +18,7 @@ export default function ShoppingCart() {
           <p>{item.numberOfItems} st. {item.name}</p>
         </div>
       ))}
+      <button onClick={buyButtonPressed}>Köp</button>
     </div>
   );
 }

@@ -7,7 +7,18 @@ const cartReducer = (state, action) => {
     switch (action.type) {
         case 'add':
             var cart = state.cart;
-            cart.push(action.content);
+            var found = false;
+            cart = cart.map(item => {
+                if (item.id === action.content.id) {
+                    item.numberOfItems += action.content.numberOfItems;
+                    found = true;
+                }
+                return item;
+            });
+            if (!found) {
+                // Product doesnt already exist in cart. Push new.
+                cart.push(action.content);
+            }
             return {cart};
         default:
             throw new Error("Unhandled action type");
