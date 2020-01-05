@@ -20,6 +20,19 @@ const cartReducer = (state, action) => {
                 cart.push(action.content);
             }
             return {cart};
+        case 'set':
+            var cart = state.cart;
+            if (action.content.numberOfItems === 0) {
+                cart = cart.filter(item => item.id !== action.content.id);
+            } else {
+                cart = cart.map(item => {
+                    if (item.id === action.content.id) {
+                        item.numberOfItems = action.content.numberOfItems;
+                    }
+                    return item;
+                });
+            }
+            return {cart};
         default:
             throw new Error("Unhandled action type");
     }
