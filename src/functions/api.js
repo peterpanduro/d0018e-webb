@@ -1,6 +1,6 @@
 const api_url = `http://api.d0018e.pndro.se`;
 
-export const registerUser = (name, email, password, callback) => {
+export const registerUser = (name, email, password, emailToken, callback) => {
     fetch(`${api_url}/user`, {
             method: 'POST',
             headers: {
@@ -10,7 +10,8 @@ export const registerUser = (name, email, password, callback) => {
             body: JSON.stringify({
                 'name': name,
                 'email': email,
-                'password': password
+                'password': password,
+                'emailToken' : emailToken
             })
         }).then(response => {
             response.json().then(json => {
