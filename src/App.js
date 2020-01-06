@@ -13,6 +13,7 @@ import Order from './pages/Order'
 import NotFound from './pages/404'
 import { CartProvider } from './AppContext'
 import EditProfile from './pages/EditProfile'
+import EditProduct from './pages/EditProduct'
 
 export default function App() {
 
@@ -38,6 +39,7 @@ export default function App() {
               <Route exact path="/cart" component={ShoppingCart} />
               <Route exact path="/account/order/:order_id" component={Order} />
               <Route exact path ="/editprofile" render={()=><EditProfile rerend={rerender}/>}/>
+              <Route exact path ="/editproduct/:product_id" component={EditProduct}/>}/>
               <Route component={NotFound} />
             </Switch>
           </div>
