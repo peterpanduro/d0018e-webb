@@ -1,16 +1,18 @@
 
-.Account {   
+.Account, .EditProfile {   
     display: flex;
     flex-direction: column;
     height: 600px;
     align-items: center;
 }
 
-.Account h2{
+.Account h2, .EditProfile h2{
     padding: 20px;
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     border-style: solid;
     border-width: 1px;
     border-color: rgb(150, 148, 148);
@@ -46,4 +48,39 @@
     background-color: yellow;
     border: none;
     padding: 12px 20px;
+}
+
+.edit {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    float: left;
+    border-style: solid;
+    border-width: 1px 0px 0px 0px;
+    border-color: rgb(150, 148, 148);
+    margin: 30px;
+}
+
+.edit input[type = text] {
+    display: flex;
+    max-width: 300px;
+    margin-top: 20px;
+    font-size: 15px;
+}
+.edit input[type = password] {
+    display: flex;
+    max-width: 300px;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.edit input[type = submit] {
+    display: flex;
+    float: right;
+    background-color: yellow;
+    margin-top: 20px;
+    border: none;
+    padding: 12px 20px;
+    width: 150px;
+    text-align: center;
 }
