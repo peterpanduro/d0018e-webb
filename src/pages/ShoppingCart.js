@@ -52,9 +52,9 @@ export default function ShoppingCart() {
           <div key={item.id}>
             <p>{item.numberOfItems} st. {item.name} </p>
             <p>DataMerchStore AB &trade;</p>
-            <input type='button' value='-' onClick={e=>decreaseProducts(e, item)}/>
-            <input type='text' value={item.numberOfItems} readOnly />
-            <input type='button' value='+' onClick={e=>increaseProducts(e, item)} />
+            <input type='button' id = 'butt' value='-' onClick={e=>decreaseProducts(e, item)}/>
+            <input type='text' id = 'texty' value={item.numberOfItems} readOnly />
+            <input type='button' id= 'butt' value='+' onClick={e=>increaseProducts(e, item)} />
             <button onClick={e => removeProduct(e, item)}>X</button>
           </div>      
         ))}

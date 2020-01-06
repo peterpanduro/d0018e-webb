@@ -56,14 +56,14 @@
     text-align: center;
 }
 
-input[type=text] {
+#texty {
     font-size: 20px;
     max-width: 40px;
     text-align: center;
     border: none;
 }
 
-input[type=button] {
+#butt {
     font-size: 20px;
     width: 30px;
     border: none;
