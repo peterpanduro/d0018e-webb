@@ -5,7 +5,6 @@ import { getUser } from '../functions/api'
 import '../css/Account.css'
 
 
-
 export default function Account() {
 
     const [user, setUser] = useState({});
@@ -31,8 +30,6 @@ export default function Account() {
         }
     }
 
-
-
     return (
         <div className = "Account">
             <h2>Mina sidor</h2>
@@ -45,7 +42,11 @@ export default function Account() {
                     <li>{user.Name}</li><br/>
                     <li>{user.Email}</li>
                 </ul>
-                <Link to="./editprofile" className="btn btn-primary">helå</Link>
+                <Link to="./editprofile">
+                    <button type = "button">
+                        Redigera profil
+                    </button>
+                </Link>
             </div>
         </div>
     )
