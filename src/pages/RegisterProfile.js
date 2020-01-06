@@ -16,6 +16,9 @@ export default function RegisterProfile() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [formValid, setFormValid] = useState(false);
+    const [emailValid, setEmailValid] = useState(false);
+    const [passwordValid, setPasswordValid] = useState(false);
 
     const checkCookie = () => {
         if (Cookies.get("jwt")) {
@@ -28,16 +31,31 @@ export default function RegisterProfile() {
     }
 
     const updateEmail = e => {
-        setEmail(e.target.value)
+        const value = e.target.value;
+        setEmail(value);
+        setEmailValid(value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)); 
+        validateForm();
     }
 
     const updatePassword = e => {
-        setPassword(e.target.value)
+        const value = e.target.value;
+        setPassword(value);
+        setPasswordValid(value.length >= 6);
+        validateForm();
+    }
+
+    const validateForm = () => {
+        setFormValid(emailValid && passwordValid);
+    }
+
+    const generateToken = (length = 64) => {
+        const crypto = require('crypto');
+        return crypto.randomBytes(length).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/\=/g, '');
     }
 
     const registerProfile = e => {
         e.preventDefault();
-        registerUser(name, email, password, (status, data) => {
+        registerUser(name, email, password, generateToken(), (status, data) => {
             if (status === 201) {
                 Cookies.set('email', email);
                 Cookies.set('password', password);
@@ -72,7 +90,7 @@ export default function RegisterProfile() {
                         <input type="text" name="Email" value={email} onChange={updateEmail}></input>
                         <h3>Lösenord</h3>
                         <input type="password" name="Password" value={password} onChange={updatePassword}></input>
-                        <input type="submit" value="Skapa konto"></input>
+                        <button type="submit" className="btn" disabled={!formValid}>Sign up</button>
                     </form> 
                 </div>
             </div>

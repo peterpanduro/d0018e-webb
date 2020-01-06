@@ -22,6 +22,14 @@ export default function CommentList(props) {
     })
   }
 
+  const date = __date => {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const locale = 'sv-SE';
+    const unformattedDate = new Date(__date);
+    const formattedDate = unformattedDate.toLocaleDateString(locale, options);
+    return formattedDate;
+  }
+
   return (
     <div className="CommentsContainer">
       <h2>Kommentarer</h2>
@@ -31,6 +39,7 @@ export default function CommentList(props) {
             <p>Betyg: </p><BeautyStars value = {comment.Rating} activeColor= "yellow" size = "30px"/>
             <p>{comment.Name}</p>
             <p>{comment.Opinion}</p>
+            <p>{date(comment.date)}</p>
           </li>
         ))}
       </ul>
