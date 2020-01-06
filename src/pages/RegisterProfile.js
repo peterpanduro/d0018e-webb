@@ -48,7 +48,7 @@ export default function RegisterProfile() {
         setFormValid(emailValid && passwordValid);
     }
 
-    const generateToken = (length = 128) => {
+    const generateToken = (length = 64) => {
         const crypto = require('crypto');
         return crypto.randomBytes(length).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/\=/g, '');
     }
