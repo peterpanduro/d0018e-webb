@@ -16,3 +16,26 @@
     background: lightgray;
     margin-bottom: 10px;
 }
+
+.newComment {
+    width: 100%;
+    float: left;
+    background: lightgray;
+    margin-bottom: 10px;
+}
+
+.newComment textarea {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    max-width: 500px;
+    margin: 20px;
+}
+
+.newComment button {
+    float: left;
+    margin: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: yellow;
+}

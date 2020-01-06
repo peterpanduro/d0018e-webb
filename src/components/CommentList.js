@@ -32,7 +32,7 @@ export default function CommentList(props) {
 
   return (
     <div className="CommentsContainer">
-      <h2>Kommentarer</h2>
+      <h2>Recensioner</h2>
       <ul className="Comments">
         {comments.map(comment => (
           <li key={comment.ID} className="Comment">
@@ -43,6 +43,11 @@ export default function CommentList(props) {
           </li>
         ))}
       </ul>
+      <h2>Skriv recension</h2>
+      <div className="newComment">
+        <textarea name="Text1" cols="40" rows="8"></textarea>
+        <button>Spara recension</button>
+      </div>
     </div>
   )
 }
