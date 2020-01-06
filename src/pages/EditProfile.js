@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { getUser } from '../functions/api'
+import { getUser, updateUser} from '../functions/api'
 import '../css/Account.css'
+import { useHistory } from 'react-router-dom';
 
 
 export default function EditProfile() {
 
+    const history = useHistory();
     const [user, setUser] = useState({});
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
 
-    useEffect(() => {
+     useEffect(() => {
         checkCookie();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
+    }, []);
 
     const checkCookie = () => {
         const jwt = Cookies.get("jwt");
@@ -30,6 +32,27 @@ export default function EditProfile() {
         }
     }
 
+    const updateName = e => {
+        setName(e.target.value)
+    }
+
+    const updateEmail = e => {
+        setEmail(e.target.value)
+    }
+
+    const updateProfile = e => {
+        e.preventDefault();
+        updateUser(Cookies.get("jwt"), name, email, (status, data) => {
+            if (status === 200) {
+                Cookies.set('email', email);
+                history.push("/account");
+            } else {
+                console.log(data);
+                alert(`Status: ${status}\nDescription: ${data.description}`);
+            }
+        })
+    }
+
     return (
         <div className = "EditProfile">
             <h2>Mina sidor</h2>
@@ -43,10 +66,12 @@ export default function EditProfile() {
                     <li>{user.Email}</li>
                 </ul>
                 <div className = "edit">
-                    <input type= 'text' placeholder='Namn'></input>
-                    <input type= 'text' placeholder='Email-adress'></input>
-                    <input type= 'password' placeholder='Lösenord'></input>
-                    <input type= 'submit' value ='Uppdatera profil'></input>
+                    <form onSubmit={updateProfile}>
+                        <input type="text" placeholder="Namn" name="Name" value={name} onChange={updateName}></input>
+                        <input type="text" placeholder="Email-adress"name="Email" value={email} onChange={updateEmail}></input>
+                        <input type= 'password' placeholder='Lösenord'></input>
+                        <input type="submit" value="Uppdatera profil"></input>
+                    </form> 
                 </div>
             </div>
         </div>

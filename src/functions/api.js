@@ -101,3 +101,22 @@ export const getUser = async (jwt, callback) => {
     const json = await response.json();
     callback(response.status, json);
 }
+
+export const updateUser = async (jwt, name, email, callback) => {
+    fetch(`${api_url}/user`, {
+        method: 'PATCH',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt' : jwt
+        },
+        body: JSON.stringify({
+            'name': name,
+            'email': email,
+        })
+    }).then(response => {
+        response.json().then(json => {
+            callback(response.status, json);
+        })
+    })
+}
