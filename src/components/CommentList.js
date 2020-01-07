@@ -30,6 +30,16 @@ export default function CommentList(props) {
     return formattedDate;
   }
 
+  const showDeleteCommentButton = () => {
+    if (props.isAdmin) {
+      return (
+        <button type = "button">
+          Delete comment
+        </button>
+      )
+    }
+  }
+
   return (
     <div className="CommentsContainer">
       <h2>Recensioner</h2>
@@ -40,8 +50,9 @@ export default function CommentList(props) {
             <p>{comment.Name}</p>
             <p>{comment.Opinion}</p>
             <p>{date(comment.date)}</p>
+            <p>{showDeleteCommentButton()}</p>
           </li>
-        ))}
+        ))} 
       </ul>
       <h2>Skriv recension</h2>
       <div className="newComment">

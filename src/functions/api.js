@@ -100,6 +100,7 @@ export const getUser = async (jwt, callback) => {
     });
     const json = await response.json();
     callback(response.status, json);
+    return json;
 }
 
 export const updateUser = async (jwt, name, email, callback) => {
@@ -117,6 +118,21 @@ export const updateUser = async (jwt, name, email, callback) => {
     }).then(response => {
         response.json().then(json => {
             callback(response.status, json);
+        })
+    })
+}
+
+export const deleteComment = async(jwt, id, callback) => {
+    fetch(`${api_url}/comments/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt' : jwt
+        }
+    }).then(response => {
+        response.json().then(json=> {
+            callback(response.status, json)
         })
     })
 }
