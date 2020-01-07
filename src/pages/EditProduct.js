@@ -8,43 +8,48 @@ import Spinner from '../components/Spinner'
 export default function Product(props) {
   useEffect(() => {
     fetchProduct(props.match.params.product_id);
-  }, [props.match.params.product_id]);  
-  const [id, setId] = useState(0);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [discountPrice, setDiscountPrice] = useState(0);
-  const [imgURL, setImgURL] = useState("");
-  const [imgCaption, setImgCaption] = useState("");
-  const [category, setCategory] = useState("");
+    }, [props.match.params.product_id]);  
 
-  const fetchProduct = (id) => {
-    getProduct(id, (status, data) => {
-      if (status === 200) {
-        const {ID, Name, Description, Price, DiscountPrice, url, caption, Category} = data[0];
-        setId(ID);
-        setName(Name);
-        setDescription(Description);
-        setPrice(Price);
-        setDiscountPrice(DiscountPrice);
-        setImgURL(url);
-        setImgCaption(caption);
-        setCategory(Category);
-      } else {
-        console.log(data)
-        alert(data)
-      }
-    })
-  }
+    useEffect(() => {
+        fetchCategories();
+    }, []);
 
-  const fetchCategories = () => {
-      getCategories((status, data) => {
-          if (status === 200) {
-              //const {ID, Name, Description} = data[0];
-              console.log(data);
-          }
-      })
-  }
+    const [id, setId] = useState(0);
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState(0);
+    const [discountPrice, setDiscountPrice] = useState(0);
+    const [imgURL, setImgURL] = useState("");
+    const [imgCaption, setImgCaption] = useState("");
+    const [category, setCategory] = useState("");
+    const [categories, setCategories] = useState([]);
+
+    const fetchProduct = (id) => {
+        getProduct(id, (status, data) => {
+        if (status === 200) {
+            const {ID, Name, Description, Price, DiscountPrice, url, caption, Category} = data[0];
+            setId(ID);
+            setName(Name);
+            setDescription(Description);
+            setPrice(Price);
+            setDiscountPrice(DiscountPrice);
+            setImgURL(url);
+            setImgCaption(caption);
+            setCategory(Category);
+        } else {
+            console.log(data)
+            alert(data)
+        }
+        })
+    }
+
+    const fetchCategories = () => {
+        getCategories((status, data) => {
+            if (status === 200) {
+                setCategories(data);
+            }
+        })
+    }
 
     return (
       <div className="product">
@@ -74,7 +79,16 @@ export default function Product(props) {
                   <label>Image Caption: </label>
                   <input type="text" name="imgCaption" value={imgCaption} maxLength="64" onChange={e => setName(e.target.value)}></input>
                   <br/>
-                  <label>{category}</label>
+                  <label>Category: </label>
+                  <select>
+                  {categories.map((item, key) => 
+                  {
+                      if(item.ID === category)
+                      return <option selected key={item.ID} value={item.Name}>{item.Name}</option>
+                    return <option key={item.ID} value={item.Name}>{item.Name}</option>
+                  }
+                  )}
+                  </select>
               </form>
             </div>
           </div>
