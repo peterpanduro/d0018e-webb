@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import Img from 'react-image'
 import '../css/Product.css';
 import CommentList from '../components/CommentList';
-import { getProduct } from '../functions/api'
+import { getProduct, getUser } from '../functions/api'
 import Spinner from '../components/Spinner'
 import { useCartDispatch } from '../AppContext'
+import Cookies from 'js-cookie';
+
+
 
 
 export default function Product(props) {
@@ -13,7 +17,10 @@ export default function Product(props) {
 
   useEffect(() => {
     fetchProduct(props.match.params.product_id);
+    fetchUser();
   }, [props.match.params.product_id]);
+
+  
 
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
@@ -24,6 +31,7 @@ export default function Product(props) {
   const [imgCaption, setImgCaption] = useState("");
 
   const [numberOfItems, setNumberOfItems] = useState(1);
+  const [isAdmin, setAdmin] = useState(false);
 
   const increaseNumberOfItems = e => {
     e.preventDefault();
@@ -53,6 +61,7 @@ export default function Product(props) {
     })
   }
 
+
   const addItemInCart = e => {
     e.preventDefault();
     cartDispatch({type: 'add', content: {name, id, numberOfItems}});
@@ -71,6 +80,33 @@ export default function Product(props) {
     return priceText;
   }
 
+  const fetchUser = () => {
+    getUser((Cookies.get("jwt")), (status, data)=> {
+      if (status === 200) {
+          console.log(data.Privilege)
+          if(data.Privilege > 0) {
+            console.log('woh');
+            setAdmin(true);
+          }
+      } else {
+          console.log({status, data});
+          alert("Check console");          
+      }
+    })    
+}
+
+const showEditButton = () => {
+  if (isAdmin&& id!==0) {
+    return (
+      <Link to={`/editproduct/${id}`}>
+        <button type = "button">
+            Redigera profil
+        </button>
+      </Link>
+    )
+  }
+}
+
     return (
       <div className="product">
           <div className="productInfo">
@@ -81,6 +117,7 @@ export default function Product(props) {
             </div>
             <div className="productInfoText">
               {showPrice()}
+              {showEditButton()}
               <h2>{name}</h2>
               <p>{description}</p>
               <div className="addToCart">
@@ -90,6 +127,7 @@ export default function Product(props) {
                   <input type='text' value={numberOfItems} readOnly />
                   <input type='button' value='+' onClick={increaseNumberOfItems} />
                 </div>
+
               </div>
             </div>
           </div>

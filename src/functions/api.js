@@ -100,6 +100,7 @@ export const getUser = async (jwt, callback) => {
     });
     const json = await response.json();
     callback(response.status, json);
+    return json;
 }
 
 export const updateUser = async (jwt, name, email, callback) => {

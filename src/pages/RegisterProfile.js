@@ -90,7 +90,7 @@ export default function RegisterProfile() {
                         <input type="text" name="Email" value={email} onChange={updateEmail}></input>
                         <h3>Lösenord</h3>
                         <input type="password" name="Password" value={password} onChange={updatePassword}></input>
-                        <button type="submit" className="btn" disabled={!formValid}>Sign up</button>
+                        <button type="submit" className="btn">Sign up</button>
                     </form> 
                 </div>
             </div>

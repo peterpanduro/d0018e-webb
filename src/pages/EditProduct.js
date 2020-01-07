@@ -75,16 +75,16 @@ export default function Product(props) {
                   <input value={discountPrice} onChange={event => setDiscountPrice(event.target.value.replace(/\D/,''))}/>
                   <br/>
                   <label>Name: </label>
-                  <input type="text" name="name" value={name} maxlenth="20"></input>
+                  <input type="text" name="name" value={name} onChange={event=>setName(event.target.value)} maxLength="20"></input>
                   <br/>
                   <label>Description: </label>
-                  <input type="text" name="description" value={description} maxlength="512"></input>
+                  <input type="text" name="description" value={description} onChange={event=>setDescription(event.target.value)} maxLength="512"></input>
                   <br/>
                   <label>Image URL: </label>
-                  <input type="text" name="description" value={imgURL} maxlength="256"></input>
+                  <input type="text" name="description" value={imgURL} onChange={event=>setImgURL(event.target.value)} maxLength="256"></input>
                   <br/>
                   <label>Image Caption: </label>
-                  <input type="text" name="description" value={imgCaption} maxlength="64"></input>
+                  <input type="text" name="description" value={imgCaption} onChange={event=>setImgCaption(event.target.value)} maxLength="64"></input>
               </form>
             </div>
           </div>
