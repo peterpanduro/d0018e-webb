@@ -83,9 +83,7 @@ export default function Product(props) {
   const fetchUser = () => {
     getUser((Cookies.get("jwt")), (status, data)=> {
       if (status === 200) {
-          console.log(data.Privilege)
           if(data.Privilege > 0) {
-            console.log('woh');
             setAdmin(true);
           }
       } else {
@@ -100,12 +98,14 @@ const showEditButton = () => {
     return (
       <Link to={`/editproduct/${id}`}>
         <button type = "button">
-            Redigera profil
+            Redigera produkt
         </button>
       </Link>
     )
   }
 }
+
+
 
     return (
       <div className="product">
@@ -117,7 +117,6 @@ const showEditButton = () => {
             </div>
             <div className="productInfoText">
               {showPrice()}
-              {showEditButton()}
               <h2>{name}</h2>
               <p>{description}</p>
               <div className="addToCart">
@@ -127,11 +126,13 @@ const showEditButton = () => {
                   <input type='text' value={numberOfItems} readOnly />
                   <input type='button' value='+' onClick={increaseNumberOfItems} />
                 </div>
-
+              </div>
+              <div id = "button2">
+                {showEditButton()}
               </div>
             </div>
           </div>
-          <CommentList product_id={id}/>
+          <CommentList product_id={id} isAdmin={isAdmin}/>
       </div>
     );
 }
