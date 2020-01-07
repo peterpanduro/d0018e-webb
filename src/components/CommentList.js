@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getComments } from '../functions/api'
+import { getComments, deleteComment } from '../functions/api'
 import '../css/CommentList.css';
 import BeautyStars from 'beauty-stars';
+import Cookies from 'js-cookie';
 
 export default function CommentList(props) { 
 
@@ -10,6 +11,7 @@ export default function CommentList(props) {
   }, [props.product_id]);
 
   const [comments, setComments] = useState([]);
+  const [comment, removeComment] = useState([]);
 
   const fetchComments = id => {
     getComments(id, (status, data) => {
@@ -18,6 +20,17 @@ export default function CommentList(props) {
       } else {
         console.log(data);
         alert(`ERROR ${status}: Check console`)
+      }
+    })
+  }
+
+  const eraseComment = (e, id) => {
+    e.preventDefault();
+    deleteComment(Cookies.get("jwt"), id, (status, data) => {
+      if (status == 200) {
+        removeComment(data);
+      } else {
+        console.log(data);
       }
     })
   }
@@ -33,7 +46,7 @@ export default function CommentList(props) {
   const showDeleteCommentButton = () => {
     if (props.isAdmin) {
       return (
-        <button type = "button">
+        <button type = "button" onClick = {e=>eraseComment(e, props.product_id)}>
           Delete comment
         </button>
       )
