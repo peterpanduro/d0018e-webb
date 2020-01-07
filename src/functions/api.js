@@ -136,3 +136,22 @@ export const deleteComment = async(jwt, id, callback) => {
         })
     })
 }
+
+export const postComment = async (jwt, id, opinion, rating, callback) => {
+    fetch(`${api_url}/comments/${id}`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt' : jwt
+        },
+        body: JSON.stringify({
+            'opinion' : opinion,
+            'rating' : rating
+        })
+    }).then(response => {
+        response.json().then(json=> {
+            callback(response.status, json)
+        })
+    })
+}

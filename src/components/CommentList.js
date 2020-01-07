@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getComments, deleteComment } from '../functions/api'
+import { getComments, deleteComment, postComment } from '../functions/api'
 import '../css/CommentList.css';
 import BeautyStars from 'beauty-stars';
 import Cookies from 'js-cookie';
@@ -12,6 +12,8 @@ export default function CommentList(props) {
 
   const [comments, setComments] = useState([]);
   const [comment, removeComment] = useState([]);
+  const [opinion, setOpinion] = useState('');
+  const [rating, setRating] = useState('');
 
   const fetchComments = id => {
     getComments(id, (status, data) => {
@@ -29,10 +31,32 @@ export default function CommentList(props) {
     deleteComment(Cookies.get("jwt"), id, (status, data) => {
       if (status == 200) {
         removeComment(data);
+        fetchComments(props.product_id)
       } else {
         console.log(data);
       }
     })
+  }
+
+  const addComments = (e, id) => {
+    e.preventDefault();
+    postComment(Cookies.get("jwt"), props.product_id, opinion, parseInt(rating), (status, data) =>{
+      if(status == 200) {
+        setOpinion('');
+        setRating('');
+        window.location.assign(`/products/${props.product_id}`)
+      } else {
+        console.log(data);
+      }
+    })
+  }
+
+  const updateOpinion = e => {
+    setOpinion(e.target.value)
+  }
+
+  const updateRating = e => {
+    setRating(e.target.value)
   }
 
   const date = __date => {
@@ -43,10 +67,10 @@ export default function CommentList(props) {
     return formattedDate;
   }
 
-  const showDeleteCommentButton = () => {
+  const showDeleteCommentButton = (id) => {
     if (props.isAdmin) {
       return (
-        <button type = "button" onClick = {e=>eraseComment(e, props.product_id)}>
+        <button type = "button" onClick = {e=>eraseComment(e, id)}>
           Delete comment
         </button>
       )
@@ -63,14 +87,19 @@ export default function CommentList(props) {
             <p>{comment.Name}</p>
             <p>{comment.Opinion}</p>
             <p>{date(comment.date)}</p>
-            <p>{showDeleteCommentButton()}</p>
+            <p>{showDeleteCommentButton(comment.ID)}</p>
           </li>
         ))} 
       </ul>
       <h2>Skriv recension</h2>
       <div className="newComment">
-        <textarea name="Text1" cols="40" rows="8"></textarea>
-        <button>Spara recension</button>
+        <form onSubmit = {addComments}>
+          <h3>Recension:</h3>
+          <textarea name="Text1" value={opinion} onChange={updateOpinion} cols="40" rows="8"></textarea>
+          <h3>Betyg, 1-5:</h3>
+          <input type="text" name="rating" value={rating} onChange={updateRating}></input>
+          <button>Spara recension</button>
+        </form>
       </div>
     </div>
   )
