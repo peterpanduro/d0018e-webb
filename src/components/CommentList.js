@@ -4,6 +4,7 @@ import '../css/CommentList.css';
 import BeautyStars from 'beauty-stars';
 import Cookies from 'js-cookie';
 
+
 export default function CommentList(props) { 
 
   useEffect(() => {
@@ -44,8 +45,9 @@ export default function CommentList(props) {
       if(status == 200) {
         setOpinion('');
         setRating('');
-        window.location.assign(`/products/${props.product_id}`)
+        window.location.assign(`/products/${props.product_id}`);
       } else {
+        alert('retard');
         console.log(data);
       }
     })

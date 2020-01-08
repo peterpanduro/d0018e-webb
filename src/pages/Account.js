@@ -48,6 +48,11 @@ export default function Account() {
                     </button>
                 </Link>
             </div>
+            <Link to="/account/order">
+                <button type ="button">
+                    Mina ordrar
+                </button>
+            </Link>
         </div>
     )
 }

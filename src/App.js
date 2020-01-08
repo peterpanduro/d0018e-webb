@@ -37,6 +37,7 @@ export default function App() {
               <Route exact path ="/register" render={()=><RegisterProfile rerend={rerender} />}/>
               <Route exact path ="/account" render={()=><Account rerend={rerender} />}/>
               <Route exact path="/cart" component={ShoppingCart} />
+              <Route exact path="/account/order" component={Order}/>
               <Route exact path="/account/order/:order_id" component={Order} />
               <Route exact path ="/editprofile" render={()=><EditProfile rerend={rerender}/>}/>
               <Route exact path ="/editproduct/:product_id" component={EditProduct}/>}/>

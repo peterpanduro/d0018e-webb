@@ -1,0 +1,47 @@
+.Order {
+    display: flex;
+    flex-direction: column;
+}
+
+.Order h1 {
+    display: flex;
+    float: left;
+    padding: 20px;
+}
+
+.orderid {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    border: solid;
+    border-width: 1px 0px 1px 0px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.orderid h3 {
+    margin: 10px;
+}
+
+.orderid li {
+    margin-left: 10px;
+}
+
+.orderInfo {
+    display: flex;
+    justify-self: center;
+}
+
+.orderInfo {
+    margin: 5px;
+}
+
+.orderInfo li {
+    width: 100%;
+}
+
+.dates {
+    font-size: 12px;
+    margin: auto;
+    padding: 10px;
+}
