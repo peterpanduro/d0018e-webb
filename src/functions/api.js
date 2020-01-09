@@ -170,15 +170,16 @@ export const getOrders = (jwt, callback) => {
 }
 
 export const postOrder = (jwt, body, callback) => {
-    fetch(`${api_url}/cart`, {
+    fetch(`${api_url}/orders`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'jwt': jwt,
-            'body': body
-        }
+            'jwt': jwt
+        },
+        body: body
     }).then(response => {
+        console.log({response});
         response.json().then(json => {
             callback(response.status, json)
         })

@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useCart } from '../AppContext';
 import '../css/ShoppingCart.css';
+import {postOrder} from '../functions/api';
+import Cookies from 'js-cookie';
+
 
 
 
 export default function ShoppingCart() {
   
   const [cartState, cartDispatch] = useCart();
+  const [order, setOrder] = useState([]);
+  const [address, setAddress] = useState('');
+  const [zipCode, setZipCode] = useState('');
+
   
 
   const buyButtonPressed = e => {
@@ -42,6 +49,36 @@ export default function ShoppingCart() {
     const numberOfItems = item.numberOfItems - 1;
     cartDispatch({type: 'set', content: {name, id, numberOfItems}});
   }
+  
+  const addOrder = (e) => {
+    e.preventDefault();
+    const items = cartState.cart.map(item=> {
+      const quantity = item.numberOfItems;
+      const product = item.id;
+      return {quantity, product}
+    })
+    const body = {address, zipCode, items}
+    const jsonbody = JSON.stringify(body);
+    postOrder(Cookies.get("jwt"), jsonbody, (status, data) =>{
+      if(status == 200) {
+        setAddress('');
+        setZipCode('');
+      } else {
+        alert('retard');
+        console.log(data);
+      }
+    })
+  }
+
+  const updateAddress = e => {
+    setAddress(e.target.value)
+  }
+
+  const updateZipCode = e => {
+    setZipCode(e.target.value)
+  }
+  
+  
 
   return (
     <div className="ShoppingCart">
@@ -61,9 +98,12 @@ export default function ShoppingCart() {
       </div>
       <div className = "uppgifter">
         <h2>Fyll i uppgifter</h2>
-          Adress: <input type = 'text'></input>
-          Postnummer: <input type = 'text'></input>
-        </div>
+        <form onSubmit = {addOrder}>
+          Adress: <input type="text" name="rating" value={address} onChange={updateAddress}></input>
+          Postnummer: <input type="text" name="rating" value={zipCode} onChange={updateZipCode}></input>
+          <button>Beställ</button>
+        </form>
+      </div>
       <button id ="buy" onClick={buyButtonPressed}>Fortsätt</button>
     </div>
   );

@@ -69,3 +69,11 @@
     border: none;
     background-color: white;
 }
+
+.uppgifter {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: auto;
+    padding: 20px;
+}
