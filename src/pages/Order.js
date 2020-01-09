@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import '../css/Order.css'
 import {Link} from 'react-router-dom';
-import { getProduct, promiseGetProduct } from '../functions/api'
-
-
+import { getOrders, promiseGetProduct } from '../functions/api'
+import Cookies from 'js-cookie'
 
 export default function Order(props) {
 
@@ -15,56 +14,19 @@ export default function Order(props) {
 useEffect(mount, [])
 
 const [orders, setOrders] = useState([]);
- 
-  const mockup = [
-    {
-      "order": {
-        "orderId": 1,
-        "items": [
-          {
-            "product": 1,
-            "quantity": 3,
-            "unitPrice": 300000
-          }
-        ],
-        "voucher": "",
-        "status": "PENDING",
-        "orderDate": "2020-01-08",
-        "shippedDate": "2020-01-08"
-      }
-    },
-    {
-      "order": {
-        "orderId": 3,
-        "items": [
-          {
-            "product": 2,
-            "quantity": 1,
-            "unitPrice": 200000
-          },
-          {
-            "product": 4,
-            "quantity": 2,
-            "unitPrice": 500000
-          }
-        ],
-        "voucher": "",
-        "status": "CONFIRMED",
-        "orderDate": "2020-01-06",
-        "shippedDate": "2020-01-07"
-      }
-    }
-  ];
 
-  const promiseGetOrders = async (userId) => {
+  const getOrdersPromise = async () => {
     return new Promise((resolve, reject) => {
-      resolve(mockup);
+      getOrders(Cookies.get("jwt"), (status, json) => {
+        console.log(json)
+        resolve(json);
+      })
     });
   }
 
-  const fetchOrders = async (userId) => {
+  const fetchOrders = async () => {
     try {
-      const data = await promiseGetOrders(userId);
+      const data = await getOrdersPromise();
       const mappedOrders = await Promise.all(data.map(async order => {
         const mappedItems = await Promise.all(order.order.items.map(async item => {
           const productName = await fetchProductName(item.product);
