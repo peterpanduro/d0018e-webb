@@ -15,6 +15,7 @@ import { CartProvider } from './AppContext'
 import EditProfile from './pages/EditProfile'
 import EditProduct from './pages/EditProduct'
 import AddProduct from './pages/AddProduct'
+import Admin from './pages/Admin'
 
 export default function App() {
 
@@ -43,6 +44,7 @@ export default function App() {
               <Route exact path ="/editprofile" render={()=><EditProfile rerend={rerender}/>}/>
               <Route exact path ="/editproduct/:product_id" component={EditProduct}/>}/>
               <Route exact path = "/addproduct" component={AddProduct}/>}/>
+              <Route exact path='/admin' component={Admin} />
               <Route component={NotFound} />
             </Switch>
           </div>
