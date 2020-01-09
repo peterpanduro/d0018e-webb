@@ -7,9 +7,12 @@ import { getProduct, promiseGetProduct } from '../functions/api'
 
 export default function Order(props) {
 
-  useEffect(() => {
+  const mount = () => {
     fetchOrders();
-  }, []);
+    const unmount = () => {}
+    return unmount
+}
+useEffect(mount, [])
 
 const [orders, setOrders] = useState([]);
  
@@ -89,7 +92,7 @@ const getOrders = (userId, callback) => {
           <div key={mock.order.orderId} className="orderid">
             <h3>OrderID: {mock.order.orderId}</h3>
               {mock.order.items.map(item => (
-                <ul className= "orderInfo">
+                <ul className="orderInfo" key={item.product}>
                   <li>Produkt: {item.product}</li>
                   <li>Antal: {item.quantity}st</li>
                   <li>Pris: {item.unitPrice}kr</li>

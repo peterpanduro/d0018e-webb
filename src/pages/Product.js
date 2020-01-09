@@ -7,10 +7,6 @@ import { getProduct, getUser } from '../functions/api'
 import Spinner from '../components/Spinner'
 import { useCartDispatch } from '../AppContext'
 import Cookies from 'js-cookie';
-import Order from './Order';
-
-
-
 
 export default function Product(props) {
   
