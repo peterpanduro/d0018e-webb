@@ -169,6 +169,37 @@ export const getOrders = (jwt, callback) => {
     })
 }
 
+export const updateOrder = (jwt, id, orderStatus, callback) => {
+    fetch(`${api_url}/orders/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt': jwt
+        },
+        body: JSON.stringify({orderStatus})
+    }).then(response => {
+        response.json().then(json=> {
+            callback(response.status, json)
+        })
+    })
+}
+
+export const getAdminOrders = (jwt, callback) => {
+    fetch(`${api_url}/admin/orders`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt': jwt
+        }
+    }).then(response => {
+        response.json().then(json=> {
+            callback(response.status, json)
+        })
+    })
+}
+
 export const postOrder = (jwt, body, callback) => {
     fetch(`${api_url}/orders`, {
         method: 'POST',
@@ -210,7 +241,6 @@ export const updateProduct = (jwt, id, name, price, discountPrice, stock, catego
                 callback(response.status,json)
             })
         })
-    
 }
 
 export const addProduct = (jwt, name, price, discountPrice, stock, category, description, image, imageDescription, archived, callback) => {
@@ -237,5 +267,4 @@ export const addProduct = (jwt, name, price, discountPrice, stock, category, des
                 callback(response.status,json)
             })
         })
-    
 }
