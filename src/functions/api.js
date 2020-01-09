@@ -186,7 +186,7 @@ export const postOrder = (jwt, body, callback) => {
     })
 }
 
-export const updateProduct = (jwt, id, name, price, discountPrice, stock, category, description, image, imageDescription, archived, callback) => {
+export const updateProduct = (jwt,id, name, price, discountPrice, stock, category, description, image, imageDescription, archived, callback) => {
     fetch(`${api_url}/products/${id}`, {
         method: 'PUT',
         headers: {
@@ -195,6 +195,7 @@ export const updateProduct = (jwt, id, name, price, discountPrice, stock, catego
             'jwt': jwt
         },
         body: JSON.stringify({
+            'id' : id,
             'name': name,
             'price': price,
             'discountPrice': discountPrice,
