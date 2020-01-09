@@ -18,7 +18,6 @@ const [orders, setOrders] = useState([]);
   const getOrdersPromise = async () => {
     return new Promise((resolve, reject) => {
       getOrders(Cookies.get("jwt"), (status, json) => {
-        console.log(json)
         resolve(json);
       })
     });
@@ -36,7 +35,6 @@ const [orders, setOrders] = useState([]);
         order.items = mappedItems;
         return order;
       }))
-      console.log(mappedOrders)
       setOrders(mappedOrders);
     } catch (e) {
       console.log({e})

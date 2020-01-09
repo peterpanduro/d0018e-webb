@@ -92,7 +92,6 @@ export default function Product(props) {
               </form>
             </div>
           </div>
-          <CommentList product_id={id}/>
       </div>
     );
 }
