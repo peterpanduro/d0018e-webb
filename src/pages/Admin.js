@@ -91,7 +91,6 @@ export default function Admin() {
                   ))} 
                   <div className = "dates">
                     <li>Orderdatum: {mock.order.orderDate}</li>
-                    <li>Skickades: {mock.order.shippedDate}</li> 
                     <li>Status:
                     <select value={1} onChange={e => setStatus(e, mock.order.orderId)}>
                         {statuses.map((c, key) => {
