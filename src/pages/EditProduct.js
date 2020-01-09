@@ -70,6 +70,11 @@ export default function Product(props) {
     const archiveCheckboxChanged = (e) => {
       setArchived(!archived)
   }
+  const test = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    setCategory(e.target.value);
+}
 
     return (
       <div className="product">
@@ -94,21 +99,19 @@ export default function Product(props) {
                   <input type="text" name="stock" value={stock} maxLength="20" onChange={e => setStock(e.target.value)}></input>
                   <br/>
                   <label>Description: </label>
-                  <input type="text" name="description" value={description} maxLength="512" onChange={e => setName(e.target.value)}></input>
+                  <input type="text" name="description" value={description} maxLength="512" onChange={e => setDescription(e.target.value)}></input>
                   <br/>
                   <label>Image URL: </label>
-                  <input type="text" name="imgURL" value={imgURL} maxLength="256" onChange={e => setName(e.target.value)}></input>
+                  <input type="text" name="imgURL" value={imgURL} maxLength="256" onChange={e => setImgURL(e.target.value)}></input>
                   <br/>
                   <label>Image Caption: </label>
-                  <input type="text" name="imgCaption" value={imgCaption} maxLength="64" onChange={e => setName(e.target.value)}></input>
+                  <input type="text" name="imgCaption" value={imgCaption} maxLength="64" onChange={e => setImgCaption(e.target.value)}></input>
                   <br/>
                   <label>Category: </label>
-                  <select>
+                  <select onChange = {e=>test(e)} value={category}>
                   {categories.map((item, key) => 
                   {
-                      if(item.ID === category)
-                      return <option selected key={item.ID} value={item.Name}>{item.Name}</option>
-                    return <option key={item.ID} value={item.Name}>{item.Name}</option>
+                      return <option value={item.ID} key ={item.ID}>{item.Name}</option>
                   }
                   )}
                   </select>

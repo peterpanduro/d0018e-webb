@@ -88,7 +88,7 @@ export default function Product(props) {
                   <select onChange = {e=>test(e)} value={category}>
                   {categories.map((item, key) => 
                   {
-                      return <option value={item.ID}>{item.Name}</option>
+                      return <option value={item.ID} key={item.ID}>{item.Name}</option>
                   }
                   )}
                   </select>

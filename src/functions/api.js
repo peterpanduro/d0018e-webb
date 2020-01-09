@@ -187,7 +187,7 @@ export const postOrder = (jwt, body, callback) => {
 }
 
 export const updateProduct = (jwt,id, name, price, discountPrice, stock, category, description, image, imageDescription, archived, callback) => {
-    fetch(`${api_url}/products/${id}`, {
+    fetch(`${api_url}/product/${id}`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
