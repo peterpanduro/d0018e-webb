@@ -59,6 +59,11 @@ export default function ShoppingCart() {
           </div>      
         ))}
       </div>
+      <div className = "uppgifter">
+        <h2>Fyll i uppgifter</h2>
+          Adress: <input type = 'text'></input>
+          Postnummer: <input type = 'text'></input>
+        </div>
       <button id ="buy" onClick={buyButtonPressed}>Fortsätt</button>
     </div>
   );
