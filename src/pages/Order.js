@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../css/Order.css'
+import {Link} from 'react-router-dom';
+import { getProduct, promiseGetProduct } from '../functions/api'
 
 
-export default function Order() {
 
+export default function Order(props) {
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+const [orders, setOrders] = useState([]);
+ 
   const mockup = [
     {
       "order": {
@@ -44,10 +53,39 @@ export default function Order() {
     }
   ];
 
+const getOrders = (userId, callback) => {
+  callback(200, mockup);
+}
+
+  const fetchOrders = (userId) => {
+    getOrders(userId, (status, data) => {
+      const mappedOrders = data.map(order => {
+        const mappedItems = Promise.all(order.order.items.map(async item => {
+          const productName = await fetchProductName(item.product);
+          item["name"] = productName;
+          return item;
+        }))
+        order.items = mappedItems;
+        return order;
+      })
+      setOrders(mappedOrders);
+      return(mappedOrders);
+    })
+  }
+
+  const fetchProductName = async (id) => {
+    try {
+      const product = await promiseGetProduct(id);
+      return product[0].Name;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   return (
     <div className="Order">
-      <h1>Lista över dina ordrar</h1>
-      {mockup.map(mock => (
+  <h1>Lista över dina ordrar</h1>
+      {orders.map(mock => (
           <div key={mock.order.orderId} className="orderid">
             <h3>OrderID: {mock.order.orderId}</h3>
               {mock.order.items.map(item => (
@@ -55,12 +93,18 @@ export default function Order() {
                   <li>Produkt: {item.product}</li>
                   <li>Antal: {item.quantity}st</li>
                   <li>Pris: {item.unitPrice}kr</li>
+                  <li>Namn: {item.name}</li> 
+                  <Link to= {`/products/${item.product}`}>
+                    <button type ="button">
+                      Produkt
+                    </button>
+                  </Link>
                 </ul>
               ))} 
               <div className = "dates">
                 <li>Orderdatum: {mock.order.orderDate}</li>
                 <li>Skickades: {mock.order.shippedDate}</li> 
-                <li>Status: {mock.order.status}</li> 
+                <li>Status: {mock.order.status}</li>
               </div>          
           </div>
         ))}

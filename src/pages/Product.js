@@ -7,6 +7,7 @@ import { getProduct, getUser } from '../functions/api'
 import Spinner from '../components/Spinner'
 import { useCartDispatch } from '../AppContext'
 import Cookies from 'js-cookie';
+import Order from './Order';
 
 
 
@@ -14,6 +15,7 @@ import Cookies from 'js-cookie';
 export default function Product(props) {
   
   const cartDispatch = useCartDispatch();
+
 
   useEffect(() => {
     fetchProduct(props.match.params.product_id);
@@ -133,6 +135,7 @@ const showEditButton = () => {
             </div>
           </div>
           <CommentList product_id={id} isAdmin={isAdmin}/>
+          
       </div>
     );
 }

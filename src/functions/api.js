@@ -20,32 +20,43 @@ export const registerUser = (name, email, password, emailToken, callback) => {
         })
 }
 
-export const getProducts = (append, callback) => {
-    fetch(`${api_url}/products${append}`, {
+export const getProducts = async (append, callback) => {
+    const response = await fetch(`${api_url}/products${append}`, {
         method: 'GET',
             headers: {
                 'Accept': 'application/json',
             },
-    }).then(response => {
-        response.json().then(json => {
-            callback(response.status, json);
-        })
-    })
+    });
+    const json = await (await response).json();
+    callback(response.status, json);
+    return json;
 }
 
-export const getProduct = (id, callback) => {
-    fetch(`${api_url}/product/${id}`, {
+export const getProduct = async (id, callback) => {
+    const response= await fetch(`${api_url}/product/${id}`, {
         method: 'GET',
             headers: {
                 'Accept': 'application/json',
             },
-    }).then(response => {
-        response.json().then(json => {
-            callback(response.status, json);
-        })
-    })
-}
+        });
+        const json = await response.json();
+        callback(response.status, json);
+        return json;
+    }
 
+export const promiseGetProduct = async (id) => {
+    return new Promise( async (resolve, reject) => {
+        fetch(`${api_url}/product/${id}`, {
+            method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(json => resolve(json));
+        }
+    )
+}
 export const getCategories = (callback) => {
     fetch(`${api_url}/categories`, {
         method: 'GET',
