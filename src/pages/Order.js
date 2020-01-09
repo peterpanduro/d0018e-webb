@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../css/Order.css'
 import {Link} from 'react-router-dom';
-import { getOrders, promiseGetProduct } from '../functions/api'
+import { getOrders, getProduct } from '../functions/api'
 import Cookies from 'js-cookie'
 
 export default function Order(props) {
@@ -21,6 +21,14 @@ const [orders, setOrders] = useState([]);
         resolve(json);
       })
     });
+  }
+
+  const getProductPromise = async (productId) => {
+    return new Promise((resolve, reject) => {
+      getProduct(productId, (status, json) => {
+        resolve(json);
+      })
+    })
   }
 
   const fetchOrders = async () => {
@@ -43,7 +51,7 @@ const [orders, setOrders] = useState([]);
 
   const fetchProductName = async (id) => {
     try {
-      const product = await promiseGetProduct(id);
+      const product = await getProductPromise(id);
       return product[0].Name;
     } catch (e) {
       console.error(e);

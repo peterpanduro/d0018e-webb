@@ -16,9 +16,9 @@ export default function RegisterProfile() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [formValid, setFormValid] = useState(false);
-    const [emailValid, setEmailValid] = useState(false);
-    const [passwordValid, setPasswordValid] = useState(false);
+    // const [formValid, setFormValid] = useState(false);
+    // const [emailValid, setEmailValid] = useState(false);
+    // const [passwordValid, setPasswordValid] = useState(false);
 
     const checkCookie = () => {
         if (Cookies.get("jwt")) {
@@ -33,23 +33,25 @@ export default function RegisterProfile() {
     const updateEmail = e => {
         const value = e.target.value;
         setEmail(value);
-        setEmailValid(value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)); 
-        validateForm();
+        // eslint-disable-next-line no-useless-escape
+        // setEmailValid(value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)); 
+        // validateForm();
     }
 
     const updatePassword = e => {
         const value = e.target.value;
         setPassword(value);
-        setPasswordValid(value.length >= 6);
-        validateForm();
+        // setPasswordValid(value.length >= 6);
+        // validateForm();
     }
 
-    const validateForm = () => {
-        setFormValid(emailValid && passwordValid);
-    }
+    // const validateForm = () => {
+    //     setFormValid(emailValid && passwordValid);
+    // }
 
     const generateToken = (length = 64) => {
         const crypto = require('crypto');
+        // eslint-disable-next-line no-useless-escape
         return crypto.randomBytes(length).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/\=/g, '');
     }
 

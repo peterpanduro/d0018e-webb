@@ -44,19 +44,6 @@ export const getProduct = async (id, callback) => {
         return json;
     }
 
-export const promiseGetProduct = async (id) => {
-    return new Promise( async (resolve, reject) => {
-        fetch(`${api_url}/product/${id}`, {
-            method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                },
-            })
-            .then(response => response.json())
-            .then(json => resolve(json));
-        }
-    )
-}
 export const getCategories = (callback) => {
     fetch(`${api_url}/categories`, {
         method: 'GET',

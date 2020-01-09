@@ -12,7 +12,6 @@ export default function CommentList(props) {
   }, [props.product_id]);
 
   const [comments, setComments] = useState([]);
-  const [comment, removeComment] = useState([]);
   const [opinion, setOpinion] = useState('');
   const [rating, setRating] = useState('');
 
@@ -30,8 +29,7 @@ export default function CommentList(props) {
   const eraseComment = (e, id) => {
     e.preventDefault();
     deleteComment(Cookies.get("jwt"), id, (status, data) => {
-      if (status == 200) {
-        removeComment(data);
+      if (status === 200) {
         fetchComments(props.product_id)
       } else {
         console.log(data);
@@ -42,10 +40,10 @@ export default function CommentList(props) {
   const addComments = (e, id) => {
     e.preventDefault();
     postComment(Cookies.get("jwt"), props.product_id, opinion, parseInt(rating), (status, data) =>{
-      if(status == 200) {
+      if(status === 200) {
         setOpinion('');
         setRating('');
-        window.location.assign(`/products/${props.product_id}`);
+        fetchComments(props.product_id);
       } else {
         alert('retard');
         console.log(data);
