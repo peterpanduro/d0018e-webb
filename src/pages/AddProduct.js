@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Img from 'react-image'
 import '../css/Product.css';
-import CommentList from '../components/CommentList';
-import { getProduct, getCategories, updateProduct } from '../functions/api'
+import {getCategories, addProduct } from '../functions/api'
 import Spinner from '../components/Spinner'
 import Cookies from 'js-cookie';
 
-
 export default function Product(props) {
-  useEffect(() => {
-    fetchProduct(props.match.params.product_id);
-    }, [props.match.params.product_id]);  
+
 
     useEffect(() => {
         fetchCategories();
     }, []);
 
-    const [id, setId] = useState(0);
+    const [stock, setStock] = useState(0);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
@@ -25,19 +21,15 @@ export default function Product(props) {
     const [imgCaption, setImgCaption] = useState("");
     const [category, setCategory] = useState("");
     const [categories, setCategories] = useState([]);
+    const [archived, setArchived] = useState(0);
 
-    const fetchProduct = (id) => {
-        getProduct(id, (status, data) => {
-        if (status === 200) {
-            const {ID, Name, Description, Price, DiscountPrice, url, caption, Category} = data[0];
-            setId(ID);
-            setName(Name);
-            setDescription(Description);
-            setPrice(Price);
-            setDiscountPrice(DiscountPrice);
-            setImgURL(url);
-            setImgCaption(caption);
-            setCategory(Category);
+    const createProduct = (e) => {
+        e.preventDefault();
+        const archived = 0;
+        
+        addProduct(Cookies.get("jwt"), name, price, discountPrice, stock, category, description, imgURL, imgCaption, archived, (status, data) => {
+          if (status === 200) {
+            console.log(data);            
         } else {
             console.log(data)
             alert(data)
@@ -53,14 +45,14 @@ export default function Product(props) {
         })
     }
 
-    const editProduct = (e) => {
-      e.preventDefault();
-      const archived = 1;
-      updateProduct(Cookies.get("jwt"), id, name, price, discountPrice, description, category, description, imgURL, imgCaption,archived, (status, data) => {
-        if (status === 200) {
-          console.log("det gick")
-        }
-      })
+    const test = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        setCategory(e.target.value);
+    }
+
+    const archiveCheckboxChanged = (e) => {
+        setArchived(!archived)
     }
 
     return (
@@ -82,27 +74,31 @@ export default function Product(props) {
                   <label>Name: </label>
                   <input type="text" name="name" value={name} maxLength="20" onChange={e => setName(e.target.value)}></input>
                   <br/>
+                  <label>STOCK: </label>
+                  <input type="text" name="stock" value={stock} maxLength="20" onChange={e => setStock(e.target.value)}></input>
+                  <br/>
                   <label>Description: </label>
-                  <input type="text" name="description" value={description} maxLength="512" onChange={e => setName(e.target.value)}></input>
+                  <input type="text" name="description" value={description} maxLength="512" onChange={e => setDescription(e.target.value)}></input>
                   <br/>
                   <label>Image URL: </label>
-                  <input type="text" name="imgURL" value={imgURL} maxLength="256" onChange={e => setName(e.target.value)}></input>
+                  <input type="text" name="imgURL" value={imgURL} maxLength="256" onChange={e => setImgURL(e.target.value)}></input>
                   <br/>
                   <label>Image Caption: </label>
-                  <input type="text" name="imgCaption" value={imgCaption} maxLength="64" onChange={e => setName(e.target.value)}></input>
+                  <input type="text" name="imgCaption" value={imgCaption} maxLength="64" onChange={e => setImgCaption(e.target.value)}></input>
                   <br/>
                   <label>Category: </label>
-                  <select>
+                  <select onChange = {e=>test(e)} value={category}>
                   {categories.map((item, key) => 
                   {
-                      if(item.ID === category)
-                      return <option selected key={item.ID} value={item.Name}>{item.Name}</option>
-                    return <option key={item.ID} value={item.Name}>{item.Name}</option>
+                      return <option value={item.ID}>{item.Name}</option>
                   }
                   )}
                   </select>
-                  <button onClick = {editProduct}>Redigera produkt</button>
-
+                  <div className = "archived">
+                    Arkiverad? Click me
+                    <input type = "checkbox" checked={archived} onChange={e=> archiveCheckboxChanged(e)}></input>
+                  </div>
+                  <button onClick = {createProduct}>Skapa ny produkt</button>
               </form>
             </div>
           </div>

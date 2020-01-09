@@ -186,3 +186,56 @@ export const postOrder = (jwt, body, callback) => {
     })
 }
 
+export const updateProduct = (jwt, id, name, price, discountPrice, stock, category, description, image, imageDescription, archived, callback) => {
+    fetch(`${api_url}/products/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt': jwt
+        },
+        body: JSON.stringify({
+            'name': name,
+            'price': price,
+            'discountPrice': discountPrice,
+            'stock' : stock,
+            'category' : category,
+            'description' : description,
+            'image' : image,
+            'imageDescription' : imageDescription,
+            'archived' : archived
+        })
+        }).then(response => {
+            response.json().then(json => {
+                callback(response.status,json)
+            })
+        })
+    
+}
+
+export const addProduct = (jwt, name, price, discountPrice, stock, category, description, image, imageDescription, archived, callback) => {
+    fetch(`${api_url}/product/`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt': jwt
+        },
+        body: JSON.stringify({
+            'name': name,
+            'price': price,
+            'discountPrice': discountPrice,
+            'stock' : stock,
+            'category' : category,
+            'description' : description,
+            'image' : image,
+            'imageDescription' : imageDescription,
+            'archived' : archived
+        })
+        }).then(response => {
+            response.json().then(json => {
+                callback(response.status,json)
+            })
+        })
+    
+}
