@@ -4,17 +4,11 @@ import '../css/ShoppingCart.css';
 import {postOrder} from '../functions/api';
 import Cookies from 'js-cookie';
 
-
-
-
 export default function ShoppingCart() {
   
   const [cartState, cartDispatch] = useCart();
-  const [order, setOrder] = useState([]);
   const [address, setAddress] = useState('');
   const [zipCode, setZipCode] = useState('');
-
-  
 
   const buyButtonPressed = e => {
     e.preventDefault();
@@ -60,7 +54,7 @@ export default function ShoppingCart() {
     const body = {address, zipCode, items}
     const jsonbody = JSON.stringify(body);
     postOrder(Cookies.get("jwt"), jsonbody, (status, data) =>{
-      if(status == 200) {
+      if(status === 200) {
         setAddress('');
         setZipCode('');
       } else {
@@ -78,8 +72,6 @@ export default function ShoppingCart() {
     setZipCode(e.target.value)
   }
   
-  
-
   return (
     <div className="ShoppingCart">
       <h1>Slutför din beställning</h1>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Img from 'react-image'
 import '../css/Product.css';
-import CommentList from '../components/CommentList';
 import { getProduct, getCategories, updateProduct } from '../functions/api'
 import Spinner from '../components/Spinner'
 import Cookies from 'js-cookie';
