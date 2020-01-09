@@ -18,19 +18,24 @@ export default function Product(props) {
     const [id, setId] = useState(0);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [stock, setStock] = useState("");
+
     const [price, setPrice] = useState(0);
     const [discountPrice, setDiscountPrice] = useState(0);
     const [imgURL, setImgURL] = useState("");
     const [imgCaption, setImgCaption] = useState("");
     const [category, setCategory] = useState("");
     const [categories, setCategories] = useState([]);
+    const [archived, setArchived] = useState(0);
+
 
     const fetchProduct = (id) => {
         getProduct(id, (status, data) => {
         if (status === 200) {
-            const {ID, Name, Description, Price, DiscountPrice, url, caption, Category} = data[0];
+            const {ID, Name, Description, Stock ,Price, DiscountPrice, url, caption, Category} = data[0];
             setId(ID);
             setName(Name);
+            setStock(Stock);
             setDescription(Description);
             setPrice(Price);
             setDiscountPrice(DiscountPrice);
@@ -54,13 +59,16 @@ export default function Product(props) {
 
     const editProduct = (e) => {
       e.preventDefault();
-      const archived = 1;
-      updateProduct(Cookies.get("jwt"), id, name, price, discountPrice, description, category, description, imgURL, imgCaption,archived, (status, data) => {
+      updateProduct(Cookies.get("jwt"),id, name, price, discountPrice, stock, category, description, imgURL, imgCaption,archived, (status, data) => {
         if (status === 200) {
           console.log("det gick")
         }
       })
     }
+
+    const archiveCheckboxChanged = (e) => {
+      setArchived(!archived)
+  }
 
     return (
       <div className="product">
@@ -81,6 +89,9 @@ export default function Product(props) {
                   <label>Name: </label>
                   <input type="text" name="name" value={name} maxLength="20" onChange={e => setName(e.target.value)}></input>
                   <br/>
+                  <label>STOCK: </label>
+                  <input type="text" name="stock" value={stock} maxLength="20" onChange={e => setStock(e.target.value)}></input>
+                  <br/>
                   <label>Description: </label>
                   <input type="text" name="description" value={description} maxLength="512" onChange={e => setName(e.target.value)}></input>
                   <br/>
@@ -100,6 +111,10 @@ export default function Product(props) {
                   }
                   )}
                   </select>
+                  <div className = "archived">
+                    Arkiverad? Click me
+                    <input type = "checkbox" checked={archived} onChange={e=> archiveCheckboxChanged(e)}></input>
+                  </div>
                   <button onClick = {editProduct}>Redigera produkt</button>
 
               </form>
