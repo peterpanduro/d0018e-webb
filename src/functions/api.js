@@ -166,3 +166,35 @@ export const postComment = async (jwt, id, opinion, rating, callback) => {
         })
     })
 }
+
+export const getOrder = (jwt, callback) => {
+    fetch(`${api_url}/account/order`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt': jwt
+        }
+    }).then(response => {
+        response.json().then(json=> {
+            callback(response.status, json)
+        })
+    })
+}
+
+export const postOrder = (jwt, body, callback) => {
+    fetch(`${api_url}/cart`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt': jwt,
+            'body': body
+        }
+    }).then(response => {
+        response.json().then(json => {
+            callback(response.status, json)
+        })
+    })
+}
+
