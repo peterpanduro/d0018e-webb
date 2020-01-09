@@ -56,24 +56,29 @@ const [orders, setOrders] = useState([]);
     }
   ];
 
-const getOrders = (userId, callback) => {
-  callback(200, mockup);
-}
+  const promiseGetOrders = async (userId) => {
+    return new Promise((resolve, reject) => {
+      resolve(mockup);
+    });
+  }
 
-  const fetchOrders = (userId) => {
-    getOrders(userId, (status, data) => {
-      const mappedOrders = data.map(order => {
-        const mappedItems = Promise.all(order.order.items.map(async item => {
+  const fetchOrders = async (userId) => {
+    try {
+      const data = await promiseGetOrders(userId);
+      const mappedOrders = await Promise.all(data.map(async order => {
+        const mappedItems = await Promise.all(order.order.items.map(async item => {
           const productName = await fetchProductName(item.product);
           item["name"] = productName;
           return item;
         }))
         order.items = mappedItems;
         return order;
-      })
+      }))
+      console.log(mappedOrders)
       setOrders(mappedOrders);
-      return(mappedOrders);
-    })
+    } catch (e) {
+      console.log({e})
+    }
   }
 
   const fetchProductName = async (id) => {
@@ -92,17 +97,19 @@ const getOrders = (userId, callback) => {
           <div key={mock.order.orderId} className="orderid">
             <h3>OrderID: {mock.order.orderId}</h3>
               {mock.order.items.map(item => (
-                <ul className="orderInfo" key={item.product}>
-                  <li>Produkt: {item.product}</li>
-                  <li>Antal: {item.quantity}st</li>
-                  <li>Pris: {item.unitPrice}kr</li>
-                  <li>Namn: {item.name}</li> 
-                  <Link to= {`/products/${item.product}`}>
-                    <button type ="button">
-                      Produkt
-                    </button>
-                  </Link>
-                </ul>
+                <div key={item.product}>
+                  <ul className="orderInfo" key={item.product}>
+                    <li>Produkt: {item.product}</li>
+                    <li>Antal: {item.quantity}st</li>
+                    <li>Pris: {item.unitPrice}kr</li>
+                    <li>Namn: {item.name}</li> 
+                    <Link to= {`/products/${item.product}`}>
+                      <button type ="button">
+                        Produkt
+                      </button>
+                    </Link>
+                  </ul>
+                </div>
               ))} 
               <div className = "dates">
                 <li>Orderdatum: {mock.order.orderDate}</li>
