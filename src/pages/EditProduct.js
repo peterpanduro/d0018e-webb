@@ -75,7 +75,13 @@ export default function Product(props) {
 
     const editProduct = (e) => {
       e.preventDefault();
-      updateProduct(Cookies.get("jwt"),id, name, price, discountPrice, stock, category, description, imgURL, imgCaption,archived, (status, data) => {
+      var archiv;
+      if (archived) {
+        archiv = 1
+      } else {
+        archiv = 0
+      }
+      updateProduct(Cookies.get("jwt"),id, name, price, discountPrice, stock, category, description, imgURL, imgCaption,archiv, (status, data) => {
         if (status === 200) {
           console.log("det gick")
         }
