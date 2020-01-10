@@ -1,5 +1,18 @@
+.productList {
+    display: flex;
+	flex-wrap: wrap;
+	margin-left: -10px;
+	margin-top: -10px;
+}
+
 .productItem {
-    background-color: white;
+    flex: 1 0 200px;
+    box-sizing: border-box;
+    background: #e0ddd5;
+    color: #171e42;
+    padding: 10px;
+	margin-left: 10px;
+	margin-top: 10px;background-color: white;
     display: float;
     float: left;
     max-width: 300px;

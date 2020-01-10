@@ -6,7 +6,7 @@ import Spinner from './Spinner';
 
 export default function ProductList(props) {
     return (
-        <div>
+        <div className="productList">
             {props.products.map(product => (
                 <div className="productItem" key ={product.ID}>
                     <Link to={{pathname: `/products/${product.ID}`, product: {
