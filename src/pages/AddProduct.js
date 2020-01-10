@@ -24,8 +24,14 @@ export default function Product(props) {
     const [archived, setArchived] = useState(0);
 
     const createProduct = (e) => {
-        e.preventDefault();        
-        addProduct(Cookies.get("jwt"), name, price, discountPrice, stock, category, description, imgURL, imgCaption, archived, (status, data) => {
+        e.preventDefault(); 
+        var archiv;
+        if (archived) {
+          archiv = 1
+        } else {
+          archiv = 0
+        }       
+        addProduct(Cookies.get("jwt"), name, price, discountPrice, stock, category, description, imgURL, imgCaption, archiv, (status, data) => {
           if (status === 200) {
             console.log(data);            
         } else {
