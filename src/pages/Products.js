@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import queryString from 'query-string';
 import '../css/Products.css';
 import Categories from '../components/CategoryList';
@@ -11,9 +11,13 @@ export default function Products(props) {
 
   useEffect(() => {
     fetchProducts(props.location.search);
-    fetchUser();
   }, [props.location.search]);
 
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const history = useHistory();
   const [products, setProducts] = useState([]);
   const [isAdmin, setAdmin] = useState(false);
 
@@ -37,9 +41,6 @@ export default function Products(props) {
           if(data.Privilege > 0) {
             setAdmin(true);
           }
-      } else {
-          console.log({status, data});
-          alert("Check console");          
       }
     })    
 }
@@ -56,8 +57,25 @@ const showEditButton = () => {
   }
 }
 
+const adminButtonClicked = e => {
+  e.preventDefault();
+  history.push('/admin')
+}
+
+const getAdminButton = () => {
+  if (isAdmin) {
+    return (
+      <button onClick={adminButtonClicked}>Handle orders</button>
+    )
+  }
+}
+
   return (
       <div className="products-parent">
+        <ul>
+        {getAdminButton()}
+        {showEditButton()}
+        </ul>
         <br/>
         <Categories reloadProducts={fetchProducts}/><br/>
         <div className = "products-container">
@@ -67,7 +85,6 @@ const showEditButton = () => {
             <p>Sweet merch</p>
           </div>
           <ProductList products={products}/><br/>
-          {showEditButton()}
         </div>
       </div>
   )

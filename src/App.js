@@ -35,13 +35,13 @@ export default function App() {
               <Route exact path="/" component={Products} />
               <Route exact path="/products" component={Products} />
               <Route exact path="/products/:product_id" component={Product} />
-              <Route exact path='/login' render={ () => <Login rerend={rerender} />}/>
-              <Route exact path ="/register" render={()=><RegisterProfile rerend={rerender} />}/>
-              <Route exact path ="/account" render={()=><Account rerend={rerender} />}/>
+              <Route exact path='/login' component={Login} />
+              <Route exact path ="/register" component={RegisterProfile} />
+              <Route exact path ="/account" component={Account} />
               <Route exact path="/cart" component={ShoppingCart} />
               <Route exact path="/account/order" component={Order}/>
               <Route exact path="/account/order/:order_id" component={Order} />
-              <Route exact path ="/editprofile" render={()=><EditProfile rerend={rerender}/>}/>
+              <Route exact path ="/editprofile" component={EditProfile} />
               <Route exact path ="/editproduct/:product_id" component={EditProduct}/>}/>
               <Route exact path = "/addproduct" component={AddProduct}/>}/>
               <Route exact path='/admin' component={Admin} />

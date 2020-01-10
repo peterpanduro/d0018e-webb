@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import '../css/Login.css'
 import { loginUser } from '../functions/api'
 
-export default function Login(props) {
+export default function Login() {
 
     const [_email, setEmail] = useState("");
     const [_password, setPassword] = useState("");
@@ -52,7 +52,6 @@ export default function Login(props) {
                 Cookies.set('email', email);
                 Cookies.set('password', password);
                 Cookies.set('jwt', data.jwt, {expires: 30});
-                props.rerend();
                 window.location.assign('/');
             } else {
                 console.log (data);

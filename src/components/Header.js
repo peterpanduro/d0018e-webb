@@ -4,7 +4,7 @@ import SearchBox from './SearchBox'
 import Cookies from 'js-cookie'
 //import '../css/Header.css'
 
-export default function Header(props) {
+export default function Header() {
 
     const logout = () => {
         Cookies.remove("jwt");
@@ -14,7 +14,7 @@ export default function Header(props) {
 
     const logoutButtonPressed = e => {
         logout();
-        props.rerend()
+        window.location.assign("/")
     }
 
     return (
