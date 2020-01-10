@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Img from 'react-image'
 import '../css/Product.css';
-import { getProduct, getCategories, updateProduct } from '../functions/api'
+import { getProduct, getCategories, updateProduct, getUser } from '../functions/api'
 import Spinner from '../components/Spinner'
 import Cookies from 'js-cookie';
 
@@ -13,6 +13,7 @@ export default function Product(props) {
 
     useEffect(() => {
         fetchCategories();
+        checkCookie();
     }, []);
 
     const [id, setId] = useState(0);
@@ -28,6 +29,21 @@ export default function Product(props) {
     const [categories, setCategories] = useState([]);
     const [archived, setArchived] = useState(0);
 
+    const checkCookie = () => {
+        const jwt = Cookies.get("jwt");
+        if (!jwt) {
+            window.location.assign("/");
+        } else {
+            getUser(jwt, (status, data) => {
+                if (status === 200) {
+                    if (data.Privilege === 1) {
+                      return;
+                    }
+                }
+                window.location.assign("/");
+            })
+        }
+    }
 
     const fetchProduct = (id) => {
         getProduct(id, (status, data) => {

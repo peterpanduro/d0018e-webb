@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { getProduct, getAdminOrders, updateOrder } from '../functions/api'
+import { getProduct, getAdminOrders, updateOrder, getUser } from '../functions/api'
 import { Link } from 'react-router-dom'
 
 export default function Admin() {
     const mount = () => {
         fetchOrders();
+        checkCookie();
         const unmount = () => {}
         return unmount
     }
@@ -13,6 +14,22 @@ export default function Admin() {
 
     const [orders, setOrders] = useState([]);
     const statuses = [{id: 1, name: "Pending"}, {id: 2, name: "Condfirmed"}, {id: 6, name: "Cancelled"}]
+
+    const checkCookie = () => {
+        const jwt = Cookies.get("jwt");
+        if (!jwt) {
+            window.location.assign("/");
+        } else {
+            getUser(jwt, (status, data) => {
+                if (status === 200) {
+                    if (data.Privilege === 1) {
+                      return;
+                    }
+                }
+                window.location.assign("/");
+            })
+        }
+    }
 
     const getOrdersPromise = async () => {
         return new Promise((resolve, reject) => {
