@@ -58,13 +58,12 @@ export default function RegisterProfile() {
     const registerProfile = e => {
         e.preventDefault();
         registerUser(name, email, password, generateToken(), (status, data) => {
-            if (status === 201) {
+            if (status === 201 || status === 200) {
                 Cookies.set('email', email);
                 Cookies.set('password', password);
                 history.push("/login");
             } else {
                 console.log(data);
-                alert(`Status: ${status}\nDescription: ${data.description}`);
             }
         })
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './css/App.css';
 // import Home from './pages/Home'
@@ -19,16 +19,11 @@ import Admin from './pages/Admin'
 
 export default function App() {
 
-  const [rend, setRend] = useState(false);
-  const rerender = () => {
-    setRend(!rend);
-  }
-
   return (
     <Router>
       <CartProvider>
       <div className="App">
-        <Header rerend={rerender}/>
+        <Header />
         <div className ="Background">
           <div className = "Content">
             <Switch>
